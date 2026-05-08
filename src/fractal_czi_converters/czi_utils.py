@@ -197,7 +197,7 @@ def _parse_czi_metadata(
         for m in range(img.dims.M):
             y_px, x_px = img.get_mosaic_tile_position(m, T=0, C=0, Z=0)
             start_x = x_px * scale_x
-            start_y = -y_px * scale_y
+            start_y = y_px * scale_y
             positions.append((f"FOV_{m}", start_x, start_y, m))
     else:
         positions.append(("FOV_0", 0.0, 0.0, None))
