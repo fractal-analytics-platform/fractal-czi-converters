@@ -1,0 +1,150 @@
+# https://peps.python.org/pep-0517/
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+# https://hatch.pypa.io/latest/config/metadata/
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+# https://hatch.pypa.io/latest/config/build/
+[tool.hatch.build.targets.wheel]
+packages = ["src/fractal_czi_converters"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "tests",
+    "docs",
+    "data",
+    "examples",
+    "notebooks",
+    ".github",
+    "**/*.ipynb_checkpoints",
+    "**/*.ipynb",
+]
+
+# Project metadata (see https://peps.python.org/pep-0621)
+[project]
+name = "fractal-czi-converters"
+dynamic = ["version"]
+description = "Converter from CZI files (Zeiss Microscope) to OME-Zarr format."
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
+authors = [{ name = "Lorenzo Cerrone", email = "lorenzo.cerrone@uzh.ch" }]
+requires-python = ">=3.12,<3.15"
+
+dependencies = [
+    "ome-zarr-converters-tools>=0.8.1,<0.9.0",
+    "fractal-task-tools>=0.5.0,<0.6.0",
+    "ngio>=0.5.8,<0.6.0",
+    "numpy",
+    "pydantic",
+    "czifile>=2026.4.30",
+    "zarrs",
+    "imagecodecs",
+]
+
+[project.optional-dependencies]
+dev = [
+    "notebook",
+    "matplotlib",
+    "devtools",
+    "hatch",
+    "pytest",
+    "pytest-cov",
+    "requests",
+    "jsonschema",
+    "ruff",
+    "pre-commit",
+]
+test = ["pytest", "pytest-cov", "devtools", "jsonschema", "pyyaml", "requests"]
+docs = ["mkdocs-material", "mike"]
+
+# https://docs.astral.sh/ruff
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["src"]
+
+# https://docs.astral.sh/ruff/rules
+[tool.ruff.lint]
+pydocstyle = { convention = "google" }
+select = [
+    "E",    # style errors
+    "W",    # style warnings
+    "F",    # flakes
+    "D",    # pydocstyle
+    "D417", # Missing argument descriptions in Docstrings
+    "I",    # isort
+    "UP",   # pyupgrade
+    "C4",   # flake8-comprehensions
+    "B",    # flake8-bugbear
+    "A001", # flake8-builtins
+    "RUF",  # ruff-specific rules
+    "TCH",  # flake8-type-checking
+    "TID",  # flake8-tidy-imports
+]
+ignore = [
+    "D401", # First line should be in imperative mood (remove to opt in)
+    "D415", # First line should end with a period (remove to opt in)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*.py" = ["D", "S"]
+
+# https://docs.astral.sh/ruff/formatter/
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 89
+skip-magic-trailing-comma = false
+
+[tool.ty.environment]
+python = ".pixi/envs/dev"
+
+# https://docs.pytest.org/
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+addopts = [
+    "--color=yes",
+    "--cov",
+    "--cov-report=term-missing",
+    "--cov-report=xml",
+]
+
+# https://coverage.readthedocs.io/
+[tool.coverage.run]
+source = ["fractal_czi_converters"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "@overload",
+    "except ImportError",
+    "\\.\\.\\.",
+    "raise NotImplementedError()",
+    "pass",
+]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[tool.pixi.pypi-dependencies]
+fractal-czi-converters = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+dev = { features = ["dev"], solve-group = "default" }
+test = { features = ["test"], solve-group = "default" }
+docs = { features = ["docs"], solve-group = "default" }
+
+[tool.pixi.feature.dev.tasks]
+ruff-fix-imports = { cmd = "ruff check --select I --fix" }
+ruff = { cmd = "ruff format", depends-on = ["ruff-fix-imports"] }
+test = { cmd = "pytest", depends-on = ["ruff"] }
