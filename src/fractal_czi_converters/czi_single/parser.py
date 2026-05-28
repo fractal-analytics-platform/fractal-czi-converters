@@ -12,6 +12,7 @@ from ome_zarr_converters_tools import (
     ConverterOptions,
     SingleImage,
     Tile,
+    TiledImage,
     default_axes_builder,
     tiles_aggregation_pipeline,
 )

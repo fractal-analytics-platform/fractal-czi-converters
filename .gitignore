@@ -9,4 +9,11 @@ __pycache__/
 .pixi/
 
 # testing data
-tests/data/
+tests/data-extended
+
+# Mac os
+.DS_Store
+
+# Coverage
+.coverage
+coverage.xml

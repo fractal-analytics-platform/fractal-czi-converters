@@ -1,5 +1,6 @@
 """Register a collection setup handler for ``SingleImage`` outputs."""
 
+from ngio import DefaultNgffVersion, NgffVersions
 from ome_zarr_converters_tools import (
     OverwriteMode,
     SingleImage,
@@ -13,7 +14,7 @@ from ome_zarr_converters_tools.pipelines import add_collection_handler
 def setup_singleimage(
     zarr_dir: str,
     tiled_images: list[TiledImage],
-    ngff_version=None,
+    ngff_version: NgffVersions = DefaultNgffVersion,
     overwrite_mode: OverwriteMode = OverwriteMode.NO_OVERWRITE,
 ) -> None:
     """Set up a SingleImage collection (overwrite-mode enforcement only)."""
@@ -33,11 +34,8 @@ def setup_singleimage(
                 )
 
 
-try:
-    add_collection_handler(
-        function=setup_singleimage,
-        collection_type="SingleImage",
-    )
-except ValueError:
-    # Already registered (e.g. re-import); safe to ignore.
-    pass
+add_collection_handler(
+    function=setup_singleimage,
+    collection_type="SingleImage",
+    overwrite=True,
+)
