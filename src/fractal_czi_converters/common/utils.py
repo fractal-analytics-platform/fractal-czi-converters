@@ -1,7 +1,7 @@
 """Common utilities for fractal CZI converters."""
 
 import logging
-from typing import Protocol, TypeVar
+from typing import Protocol
 
 from ome_zarr_converters_tools import (
     AcquisitionOptions,
@@ -22,28 +22,23 @@ class BaseAcquisitionModel(BaseModel):
     """Advanced acquisition options."""
 
 
-AcquisitionModelType = TypeVar(
-    "AcquisitionModelType", bound=BaseAcquisitionModel, contravariant=True
-)
-
-
-class ParserProtocol(Protocol[AcquisitionModelType]):
+class ParserProtocol[T: BaseAcquisitionModel](Protocol):
     """Protocol for acquisition metadata parser."""
 
     def __call__(
         self,
         *,
-        acquisition_model: AcquisitionModelType,
+        acquisition_model: T,
         converter_options: ConverterOptions,
     ) -> list[TiledImage]:
         """Parse the acquisition metadata and return tiled images."""
         ...
 
 
-def parse_acquisitions(
+def parse_acquisitions[T: BaseAcquisitionModel](
     *,
-    parse_function: ParserProtocol[AcquisitionModelType],
-    acquisitions: list[AcquisitionModelType],
+    parse_function: ParserProtocol[T],
+    acquisitions: list[T],
     converter_options: ConverterOptions,
 ) -> list[TiledImage]:
     """Parse the acquisitions metadata and return tiled images.
@@ -51,7 +46,7 @@ def parse_acquisitions(
     Args:
         parse_function (Callable): Function to parse the acquisition metadata
             and return tiled images.
-        acquisitions (list[AcquisitionModelType]): List of acquisition models.
+        acquisitions (list[T]): List of acquisition models.
         converter_options (ConverterOptions): Converter options.
 
     Returns:
