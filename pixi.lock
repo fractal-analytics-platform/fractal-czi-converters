@@ -42,7 +42,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/15/b2/0e62f78c0c5ba7e3d2c5945a82456f4fac76c480940f805e0b97fcbc2f65/pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2a/2d/d4bf65e47cea8ff2c794a600c4fd1273a7902f268757c531e0ee9f18aa58/pooch-1.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2b/76/7f1bfd6afff4c5e38e36a3c6d68eb5f4b7311ea80baf693db78d95b603c4/propcache-0.5.2-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl
@@ -102,6 +101,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/0d/3caa568e37e36532cfe767ccfa6da085150497e9023fe380989790be755f/imagecodecs-2026.5.10-cp312-abi3-manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ef/82/7a9d0550484a62c6da82858ee9419f3dd1ccc9aa1c26a1e43da3ecd20b0d/natsort-8.4.0-py3-none-any.whl
@@ -136,7 +136,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/0d/b4f481e18c5a51864e6d12b9a05ecf72919696680b747c958c3fc1f4fbae/tornado-6.5.6-cp39-abi3-macosx_10_9_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/1b/9f/38ff9e57a2eade7bf9dfee5eae17f39fc0e998658050279cbb14d97d36d9/msgpack-1.1.2-cp314-cp314-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
@@ -200,6 +199,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/db/bc/83e112abc66cd466c6b83f99118035867cecd41802f8d044638aa78a106e/locket-1.0.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ed/a6/d05a85fd51daeb2e4ea71d102f15b34fedca8e931af02594193ae4fd25f7/scipy-1.17.1-cp314-cp314-macosx_12_0_arm64.whl
@@ -254,7 +254,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/15/b2/0e62f78c0c5ba7e3d2c5945a82456f4fac76c480940f805e0b97fcbc2f65/pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/39/47f9197bdd44df24d67ac8893641e16f386c984a0619ef2ee4c51fbbc019/beautifulsoup4-4.14.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1c/78/504fdd027da3b84ff1aecd9f6957e65f35134534ccc6da8628eb71e76d3f/send2trash-2.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1e/c0/56472c251d09858a53e51efbd485b09e1995d8731668b76d52e5dd6ee0f1/ruff-0.15.14-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
@@ -405,6 +404,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e4/8a/11ae7e271870f0ad8fa0012e4265982bebe0fdc21766b161fb8b8fc3aefc/hatch-1.16.5-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/0d/3caa568e37e36532cfe767ccfa6da085150497e9023fe380989790be755f/imagecodecs-2026.5.10-cp312-abi3-manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/e2/c2e3abf398f80732e58b03be77bde9022550d221dd8781bf586bd4d97cc1/async_lru-2.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e6/34/ebdc18bae6aa14fbee1a08b63c015c72b64868ff7dae68808ab500c492e2/tinycss2-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e7/00/3fca040d7cf8a32776d3d81a00c8ee7457e00f80c649f1e4a863c8321ae9/uri_template-1.3.0-py3-none-any.whl
@@ -463,7 +463,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1a/39/47f9197bdd44df24d67ac8893641e16f386c984a0619ef2ee4c51fbbc019/beautifulsoup4-4.14.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/0d/b4f481e18c5a51864e6d12b9a05ecf72919696680b747c958c3fc1f4fbae/tornado-6.5.6-cp39-abi3-macosx_10_9_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/1b/9f/38ff9e57a2eade7bf9dfee5eae17f39fc0e998658050279cbb14d97d36d9/msgpack-1.1.2-cp314-cp314-macosx_11_0_arm64.whl
@@ -619,6 +618,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/e2/50/ecf4f70d65bdb7519b28a33d1b2fee8a4b4ba1ae1a92f15d97e877c5de21/jupyter_server-2.18.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e2/cc/e097523dd85c9cf5d354f78310927f1656c422bd7b2613b2db3e3f9a0f2c/webcolors-25.10.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e4/8a/11ae7e271870f0ad8fa0012e4265982bebe0fdc21766b161fb8b8fc3aefc/hatch-1.16.5-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/e2/c2e3abf398f80732e58b03be77bde9022550d221dd8781bf586bd4d97cc1/async_lru-2.3.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e6/34/ebdc18bae6aa14fbee1a08b63c015c72b64868ff7dae68808ab500c492e2/tinycss2-1.4.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e7/00/3fca040d7cf8a32776d3d81a00c8ee7457e00f80c649f1e4a863c8321ae9/uri_template-1.3.0-py3-none-any.whl
@@ -686,7 +686,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/15/b2/0e62f78c0c5ba7e3d2c5945a82456f4fac76c480940f805e0b97fcbc2f65/pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/22/5b/dbc6a8cddc9cfa9c4971d59fb12bb8d42e161b7e7f8cc89e49137c5b279c/mkdocs-1.6.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2a/2d/d4bf65e47cea8ff2c794a600c4fd1273a7902f268757c531e0ee9f18aa58/pooch-1.9.0-py3-none-any.whl
@@ -760,6 +759,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/de/1f/77fa3081e4f66ca3576c896ae5d31c3002ac6607f9747d2e3aa49227e464/markdown-3.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/0d/3caa568e37e36532cfe767ccfa6da085150497e9023fe380989790be755f/imagecodecs-2026.5.10-cp312-abi3-manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ef/82/7a9d0550484a62c6da82858ee9419f3dd1ccc9aa1c26a1e43da3ecd20b0d/natsort-8.4.0-py3-none-any.whl
@@ -799,7 +799,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/0d/b4f481e18c5a51864e6d12b9a05ecf72919696680b747c958c3fc1f4fbae/tornado-6.5.6-cp39-abi3-macosx_10_9_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/1b/9f/38ff9e57a2eade7bf9dfee5eae17f39fc0e998658050279cbb14d97d36d9/msgpack-1.1.2-cp314-cp314-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
@@ -877,6 +876,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/de/1f/77fa3081e4f66ca3576c896ae5d31c3002ac6607f9747d2e3aa49227e464/markdown-3.10.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ed/a6/d05a85fd51daeb2e4ea71d102f15b34fedca8e931af02594193ae4fd25f7/scipy-1.17.1-cp314-cp314-macosx_12_0_arm64.whl
@@ -927,7 +927,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/15/b2/0e62f78c0c5ba7e3d2c5945a82456f4fac76c480940f805e0b97fcbc2f65/pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/26/2b/78048cbe3b999f6cbf9cc0d90abba6a88a3e0863a8c1c6cbc762f3f8802f/coverage-7.14.1-cp314-cp314-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/2a/2d/d4bf65e47cea8ff2c794a600c4fd1273a7902f268757c531e0ee9f18aa58/pooch-1.9.0-py3-none-any.whl
@@ -999,6 +998,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e5/0d/3caa568e37e36532cfe767ccfa6da085150497e9023fe380989790be755f/imagecodecs-2026.5.10-cp312-abi3-manylinux_2_28_x86_64.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ef/82/7a9d0550484a62c6da82858ee9419f3dd1ccc9aa1c26a1e43da3ecd20b0d/natsort-8.4.0-py3-none-any.whl
@@ -1034,7 +1034,6 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/14/2f/967ba146e6d58cf6a652da73885f52fc68001525b4197effc174321d70b4/jmespath-1.1.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/16/e1/3079a9ff9b8e11b846c6ac5c8b5bfb7ff225eee721825310c91b3b50304f/tqdm-4.67.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/18/67/36e9267722cc04a6b9f15c7f3441c2363321a3ea07da7ae0c0707beb2a9c/typing_extensions-4.15.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/1b/0d/b4f481e18c5a51864e6d12b9a05ecf72919696680b747c958c3fc1f4fbae/tornado-6.5.6-cp39-abi3-macosx_10_9_universal2.whl
       - pypi: https://files.pythonhosted.org/packages/1b/9f/38ff9e57a2eade7bf9dfee5eae17f39fc0e998658050279cbb14d97d36d9/msgpack-1.1.2-cp314-cp314-macosx_11_0_arm64.whl
       - pypi: https://files.pythonhosted.org/packages/1f/6e/7d8850ff112f8f80d394ca45e89b975a3a43559d47af3137b767669b3294/tifffile-2026.5.15-py3-none-any.whl
@@ -1110,6 +1109,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/db/bc/83e112abc66cd466c6b83f99118035867cecd41802f8d044638aa78a106e/locket-1.0.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/dc/9b/47798a6c91d8bdb567fe2698fe81e0c6b7cb7ef4d13da4114b41d239f65d/typing_inspection-0.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ec/dd/96da98f892250475bdf2328112d7468abdd4acc7b902b6af23f4ed958ea0/pytz-2026.2-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ed/a6/d05a85fd51daeb2e4ea71d102f15b34fedca8e931af02594193ae4fd25f7/scipy-1.17.1-cp314-cp314-macosx_12_0_arm64.whl
@@ -1538,7 +1538,7 @@ packages:
   - imagecodecs
   - ngio>=0.5.8,<0.6.0
   - numpy
-  - ome-zarr-converters-tools>=0.8.1,<0.9.0
+  - ome-zarr-converters-tools>=0.9,<0.10
   - pydantic
   - zarrs
   - devtools ; extra == 'dev'
@@ -1863,49 +1863,6 @@ packages:
   version: 4.15.0
   sha256: f0fa19c6845758ab08074a0cfa8b7aecb71c999ca73d62883bc25cc018c4e548
   requires_python: '>=3.9'
-- pypi: https://files.pythonhosted.org/packages/18/68/a35b590f9b52ec95b5fa04b11ff3546db0d35351fcdbfcf08f0bf97841c2/ome_zarr_converters_tools-0.8.2-py3-none-any.whl
-  name: ome-zarr-converters-tools
-  version: 0.8.2
-  sha256: c5d25b145d812c8b66b8da6b9f326cbf192e25d617a27957a2fc81d26f11c0f0
-  requires_dist:
-  - fsspec
-  - ngio>=0.5.8,<0.6.0
-  - numpy
-  - pillow
-  - s3fs
-  - tifffile
-  - toml
-  - tqdm
-  - check-manifest>=0.51,<0.52 ; extra == 'dev'
-  - ipycytoscape ; extra == 'dev'
-  - ipython ; extra == 'dev'
-  - matplotlib ; extra == 'dev'
-  - mypy ; extra == 'dev'
-  - notebook ; extra == 'dev'
-  - pdbpp ; extra == 'dev'
-  - plotly ; extra == 'dev'
-  - pre-commit ; extra == 'dev'
-  - rich ; extra == 'dev'
-  - ruff ; extra == 'dev'
-  - markdown-exec[ansi] ; extra == 'docs'
-  - matplotlib ; extra == 'docs'
-  - mike ; extra == 'docs'
-  - mkdocs-autorefs ; extra == 'docs'
-  - mkdocs-git-committers-plugin-2 ; extra == 'docs'
-  - mkdocs-git-revision-date-localized-plugin ; extra == 'docs'
-  - mkdocs-jupyter>=0.25.1,<0.26.0 ; extra == 'docs'
-  - mkdocs-material==9.7.1 ; extra == 'docs'
-  - mkdocs==1.6.1 ; extra == 'docs'
-  - mkdocstrings[python]>=1.0.2,<1.1.0 ; extra == 'docs'
-  - rich ; extra == 'docs'
-  - scikit-image ; extra == 'docs'
-  - tabulate ; extra == 'docs'
-  - aiomoto ; extra == 'test'
-  - devtools ; extra == 'test'
-  - pytest ; extra == 'test'
-  - pytest-cov ; extra == 'test'
-  - zarrs ; extra == 'zarrs'
-  requires_python: '>=3.11,<3.15'
 - pypi: https://files.pythonhosted.org/packages/1a/39/47f9197bdd44df24d67ac8893641e16f386c984a0619ef2ee4c51fbbc019/beautifulsoup4-4.14.3-py3-none-any.whl
   name: beautifulsoup4
   version: 4.14.3
@@ -4665,6 +4622,49 @@ packages:
   - numcodecs ; extra == 'test'
   - kerchunk ; extra == 'test'
   requires_python: '>=3.12'
+- pypi: https://files.pythonhosted.org/packages/e5/1d/80dd75987a116188e99abdcd7905b2aecf9cbf926211c0581f18c587c1ec/ome_zarr_converters_tools-0.9.0-py3-none-any.whl
+  name: ome-zarr-converters-tools
+  version: 0.9.0
+  sha256: 8adf365492ecd03b514733c2d5acf46db65c271d05504e0caddb6c95a2084c70
+  requires_dist:
+  - fsspec
+  - ngio>=0.5.8,<0.6.0
+  - numpy
+  - pillow
+  - s3fs
+  - tifffile
+  - toml
+  - tqdm
+  - check-manifest>=0.51,<0.52 ; extra == 'dev'
+  - ipycytoscape ; extra == 'dev'
+  - ipython ; extra == 'dev'
+  - matplotlib ; extra == 'dev'
+  - mypy ; extra == 'dev'
+  - notebook ; extra == 'dev'
+  - pdbpp ; extra == 'dev'
+  - plotly ; extra == 'dev'
+  - pre-commit ; extra == 'dev'
+  - rich ; extra == 'dev'
+  - ruff ; extra == 'dev'
+  - markdown-exec[ansi] ; extra == 'docs'
+  - matplotlib ; extra == 'docs'
+  - mike ; extra == 'docs'
+  - mkdocs-autorefs ; extra == 'docs'
+  - mkdocs-git-committers-plugin-2 ; extra == 'docs'
+  - mkdocs-git-revision-date-localized-plugin ; extra == 'docs'
+  - mkdocs-jupyter>=0.25.1,<0.26.0 ; extra == 'docs'
+  - mkdocs-material==9.7.1 ; extra == 'docs'
+  - mkdocs==1.6.1 ; extra == 'docs'
+  - mkdocstrings[python]>=1.0.2,<1.1.0 ; extra == 'docs'
+  - rich ; extra == 'docs'
+  - scikit-image ; extra == 'docs'
+  - tabulate ; extra == 'docs'
+  - aiomoto ; extra == 'test'
+  - devtools ; extra == 'test'
+  - pytest ; extra == 'test'
+  - pytest-cov ; extra == 'test'
+  - zarrs ; extra == 'zarrs'
+  requires_python: '>=3.11,<3.15'
 - pypi: https://files.pythonhosted.org/packages/e5/e2/c2e3abf398f80732e58b03be77bde9022550d221dd8781bf586bd4d97cc1/async_lru-2.3.0-py3-none-any.whl
   name: async-lru
   version: 2.3.0

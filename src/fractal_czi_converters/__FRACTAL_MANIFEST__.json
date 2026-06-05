@@ -139,7 +139,7 @@
                 "type": "string"
               },
               "tolerance": {
-                "default": 0,
+                "default": 1,
                 "minimum": 0,
                 "title": "Tiling Tolerance (in pixels)",
                 "type": "number"
@@ -182,8 +182,8 @@
                 "title": "Wavelength Id"
               },
               "color": {
-                "$ref": "#/$defs/DefaultColor",
-                "default": "Blue (#0000FF)",
+                "$ref": "#/$defs/ColorMenu",
+                "default": "Auto",
                 "description": "The color associated with the channel, e.g. for visualization purposes.",
                 "title": "Color"
               }
@@ -193,6 +193,32 @@
             ],
             "title": "ChannelInfoUI",
             "type": "object"
+          },
+          "ColorMenu": {
+            "enum": [
+              "Auto",
+              "Blue (#0000FF)",
+              "Red (#FF0000)",
+              "Yellow (#FFFF00)",
+              "Magenta (#FF00FF)",
+              "Cyan (#00FFFF)",
+              "Gray (#808080)",
+              "Green (#00FF00)",
+              "Orange (#FF8000)",
+              "Purple (#8000FF)",
+              "Teal (#008080)",
+              "Lime (#00FF80)",
+              "Amber (#FFBF00)",
+              "Pink (#FF0080)",
+              "Navy (#000080)",
+              "Maroon (#800000)",
+              "Olive (#808000)",
+              "Coral (#FF7F50)",
+              "Violet (#EE82EE)"
+            ],
+            "title": "ColorMenu",
+            "type": "string",
+            "description": "Missing description for ColorMenu."
           },
           "ConverterOptions": {
             "additionalProperties": false,
@@ -207,7 +233,7 @@
               "tiling_strategy": {
                 "default": {
                   "mode": "Auto",
-                  "tolerance": 0.0
+                  "tolerance": 1.0
                 },
                 "description": "Tiling strategy to use during conversion.\n\n- Auto: Automatically determine if Snap to Grid is possible, otherwise use Snap to\n  Corners. Accepts an optional tolerance (in pixels) for grid alignment.\n- Snap to Grid: Tile images to fit a regular grid. This is only possible if image\n  positions align to a grid (potentially with overlap). Accepts an optional\n  tolerance (in pixels).\n- Snap to Corners: Tile images to fit a grid defined by the corner positions.\n- Inplace: Write tiles in their original positions without tiling. This may lead to\n  artifacts if microscope stage positions are not precise.\n- No Tiling: Each field of view is written as a single OME-Zarr.",
                 "discriminator": {
@@ -351,31 +377,6 @@
             ],
             "title": "DataTypeEnum",
             "type": "string"
-          },
-          "DefaultColor": {
-            "enum": [
-              "Blue (#0000FF)",
-              "Red (#FF0000)",
-              "Yellow (#FFFF00)",
-              "Magenta (#FF00FF)",
-              "Cyan (#00FFFF)",
-              "Gray (#808080)",
-              "Green (#00FF00)",
-              "Orange (#FF8000)",
-              "Purple (#8000FF)",
-              "Teal (#008080)",
-              "Lime (#00FF80)",
-              "Amber (#FFBF00)",
-              "Pink (#FF0080)",
-              "Navy (#000080)",
-              "Maroon (#800000)",
-              "Olive (#808000)",
-              "Coral (#FF7F50)",
-              "Violet (#EE82EE)"
-            ],
-            "title": "DefaultColor",
-            "type": "string",
-            "description": "Missing description for DefaultColor."
           },
           "DefaultScheduler": {
             "additionalProperties": false,
@@ -751,7 +752,7 @@
                 "type": "string"
               },
               "tolerance": {
-                "default": 0,
+                "default": 1,
                 "minimum": 0,
                 "title": "Tiling Tolerance (in pixels)",
                 "type": "number"
@@ -947,7 +948,7 @@
               "writer_mode": "By FOV",
               "tiling_strategy": {
                 "mode": "Auto",
-                "tolerance": 0.0
+                "tolerance": 1.0
               },
               "stage_position_corrections": {
                 "align_t": false,
@@ -1005,7 +1006,7 @@
                 "type": "string"
               },
               "tolerance": {
-                "default": 0,
+                "default": 1,
                 "minimum": 0,
                 "title": "Tiling Tolerance (in pixels)",
                 "type": "number"
@@ -1063,7 +1064,7 @@
               "tiling_strategy": {
                 "default": {
                   "mode": "Auto",
-                  "tolerance": 0.0
+                  "tolerance": 1.0
                 },
                 "description": "Tiling strategy to use during conversion.\n\n- Auto: Automatically determine if Snap to Grid is possible, otherwise use Snap to\n  Corners. Accepts an optional tolerance (in pixels) for grid alignment.\n- Snap to Grid: Tile images to fit a regular grid. This is only possible if image\n  positions align to a grid (potentially with overlap). Accepts an optional\n  tolerance (in pixels).\n- Snap to Corners: Tile images to fit a grid defined by the corner positions.\n- Inplace: Write tiles in their original positions without tiling. This may lead to\n  artifacts if microscope stage positions are not precise.\n- No Tiling: Each field of view is written as a single OME-Zarr.",
                 "discriminator": {
@@ -1441,7 +1442,7 @@
                 "type": "string"
               },
               "tolerance": {
-                "default": 0,
+                "default": 1,
                 "minimum": 0,
                 "title": "Tiling Tolerance (in pixels)",
                 "type": "number"
