@@ -15,7 +15,7 @@ SNAPSHOT_DIR = DATA_DIR / "Zeiss-CZI" / "snapshots"
 # Small multi-mosaic single-acquisition file committed for CI: one scene made of
 # four mosaic sub-tiles. Exercises both mosaic modes (per-tile FOVs vs a single
 # czifile-assembled image).
-_MOSAIC_DATASET = "img_1p2c1z1t_ManuallyDrawnRegion"
+_MOSAIC_DATASET = "img_4p2c1z1t_ManuallyDrawnRegion"
 
 
 @pytest.mark.parametrize(

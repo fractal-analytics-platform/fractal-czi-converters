@@ -27,7 +27,7 @@ _SINGLE_IMAGE_DATASETS = [
     "img_1p2c1z4t_TimeSeries",
     "img_1p2c3z4t_TimeSeries",
     "img_2p2c1z1t_Position",
-    "img_1p2c1z1t_ManuallyDrawnRegion",
+    "img_4p2c1z1t_ManuallyDrawnRegion",
 ]
 
 
