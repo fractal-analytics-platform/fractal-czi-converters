@@ -23,3 +23,6 @@ coverage.xml d
 
 # Zarr
 *.zarr
+
+# Coverage reports
+coverage.xml
