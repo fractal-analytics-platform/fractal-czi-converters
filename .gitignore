@@ -16,7 +16,7 @@ tests/data-extended
 
 # Coverage
 .coverage
-coverage.xml
+coverage.xml d
 
 # Notebooks
 *.ipynb

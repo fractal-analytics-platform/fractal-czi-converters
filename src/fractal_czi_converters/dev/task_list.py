@@ -16,4 +16,14 @@ TASK_LIST = [
         category="Conversion",
         tags=["Zeiss", "Single Image Converter"],
     ),
+    ConverterCompoundTask(
+        name="Convert CZI Plate to OME-Zarr",
+        executable_init="czi_plate/convert_czi_plate_init_task.py",
+        executable="common/image_in_plate_compute_task.py",
+        meta_init={"cpus_per_task": 1, "mem": 4000},
+        meta={"cpus_per_task": 1, "mem": 12000},
+        category="Conversion",
+        modality="HCS",
+        tags=["Zeiss", "Plate converter"],
+    ),
 ]
