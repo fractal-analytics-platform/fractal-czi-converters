@@ -1,13 +1,14 @@
 """Initialize the CZI single-acquisition to OME-Zarr conversion task."""
 
 import logging
+from typing import Literal
 
 from ome_zarr_converters_tools import (
     ConverterOptions,
     OverwriteMode,
     setup_images_for_conversion,
 )
-from pydantic import model_validator, validate_call
+from pydantic import validate_call
 
 from fractal_czi_converters.common import BaseAcquisitionModel, parse_acquisitions
 from fractal_czi_converters.czi_single.parser import parse_czi_single_acq_metadata
@@ -21,29 +22,25 @@ default_converter_options = ConverterOptions()
 class CziSingleAcqAcquisitionModel(BaseAcquisitionModel):
     """Acquisition input model for CZI single-acquisition conversion.
 
-    ``scene_index`` controls whether a single scene is converted (named mode)
-    or every scene in the file is processed (wildcard mode).
+    The whole CZI file is converted into a single OME-Zarr image: every scene
+    becomes a positioned field of view inside that image.
     """
 
-    scene_index: int | None = None
-    """
-    Optional S-coordinate of the scene to convert. If ``None``, all scenes
-    in the CZI file are converted (wildcard mode).
-    """
     zarr_name: str | None = None
     """
-    Optional zarr output name override. ``None`` derives the name as
-    ``{czi_stem}_{scene_name}`` or ``{czi_stem}_Scene_{scene_key}``.
-    Cannot be used in wildcard mode (when ``scene_index`` is None).
+    Optional zarr output name override. None derives the name from the CZI
+    file stem.
     """
+    mosaic_mode: Literal["tiles", "assembled"] = "tiles"
+    """
+    How to handle a scene that is a mosaic (CZI "M" dimension):
 
-    @model_validator(mode="after")
-    def _check_combo(self) -> "CziSingleAcqAcquisitionModel":
-        if self.scene_index is None and self.zarr_name is not None:
-            raise ValueError(
-                "'zarr_name' can only be used when 'scene_index' is provided."
-            )
-        return self
+    * "tiles" (default): each mosaic sub-tile becomes its own positioned
+      field of view ("P1_m0", "P1_m1", ...) and "ome-zarr-converters-tools"
+      stitches them.
+    * "assembled": each scene is converted as a single field of view
+      ("P1"); "czifile" assembles the mosaic when reading the scene.
+    """
 
 
 @validate_call

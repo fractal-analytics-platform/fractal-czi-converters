@@ -19,6 +19,15 @@ _SINGLE_IMAGE_DATASETS = [
     "img_1p5c55z1t_4i_Round1",
     "img_1p4c80z1t_4i_Round2",
     "img_1p4c14z2t_TimeSeries",
+    "img_1p1c1z1t_Position",
+    "img_1p2c1z1t_16Bit",
+    "img_1p2c1z1t_Camera",
+    "img_1p2c1z1t_Position",
+    "img_1p2c3z1t_Position",
+    "img_1p2c1z4t_TimeSeries",
+    "img_1p2c3z4t_TimeSeries",
+    "img_2p2c1z1t_Position",
+    "img_1p2c1z1t_ManuallyDrawnRegion",
 ]
 
 

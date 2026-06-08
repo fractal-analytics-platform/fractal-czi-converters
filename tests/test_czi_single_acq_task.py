@@ -12,17 +12,28 @@ from .utils import DATA_DIR, run_converter_test
 RAW_DIR = DATA_DIR / "Zeiss-CZI" / "raw"
 SNAPSHOT_DIR = DATA_DIR / "Zeiss-CZI" / "snapshots"
 
-_SINGLE_IMAGE_DATASETS = []
+# Small multi-mosaic single-acquisition file committed for CI: one scene made of
+# four mosaic sub-tiles. Exercises both mosaic modes (per-tile FOVs vs a single
+# czifile-assembled image).
+_MOSAIC_DATASET = "img_1p2c1z1t_ManuallyDrawnRegion"
 
 
 @pytest.mark.parametrize(
     "init_task_kwargs, snapshot_path",
     [
         pytest.param(
-            {"acquisitions": [{"path": str(RAW_DIR / f"{name}.czi")}]},
-            SNAPSHOT_DIR / f"{name}.yaml",
+            {
+                "acquisitions": [
+                    {
+                        "path": str(RAW_DIR / f"{_MOSAIC_DATASET}.czi"),
+                        "mosaic_mode": mode,
+                    }
+                ]
+            },
+            SNAPSHOT_DIR / f"{_MOSAIC_DATASET}_{mode}.yaml",
+            id=f"{_MOSAIC_DATASET}-{mode}",
         )
-        for name in _SINGLE_IMAGE_DATASETS
+        for mode in ("tiles", "assembled")
     ],
 )
 def test_czi_single_acq(

@@ -26,15 +26,30 @@ def _to_canonical_shape(arr: np.ndarray, dims: tuple[str, ...]) -> np.ndarray:
 
 
 class CziSceneLoader(ImageLoaderInterface):
-    """Loader for a single scene within a CZI file."""
+    """Loader for a scene (or a mosaic sub-tile of a scene) within a CZI file.
+
+    Memory/performance note (mosaic tiles): when ``roi`` is set we load one
+    mosaic tile via ``czifile``'s ROI crop. ``asarray`` allocates only an
+    ROI-sized output array (the tile, not the whole scene), so memory stays
+    bounded by the tile and the converter never holds all regions at once (the
+    ``BY_FOV`` writer streams one tile at a time). However, ``czifile`` decodes
+    *every* subblock of the scene and discards the ones outside the ROI only
+    after decoding. Loading an N-tile mosaic therefore costs ~O(N^2) subblock
+    decodes (CPU/IO, not memory). This is fine for the few-tiles-per-scene case
+    we target; revisit (e.g. a subblock-targeted loader) if large mosaics
+    become common.
+    """
 
     file_path: str
     scene_key: int
+    roi: tuple[int, int, int, int] | None = None
+    """Absolute-pixel ``(x, y, width, height)`` crop, or ``None`` for the whole
+    scene. Used to address an individual mosaic tile within a scene."""
 
     def load_data(self, resource: Any = None) -> np.ndarray:
-        """Load the scene image data as a NumPy array."""
+        """Load the scene (or ROI crop) image data as a NumPy array."""
         with czifile.CziFile(self.file_path) as czi:
-            img = czi.scenes[self.scene_key]
+            img = czi.scenes(scene=self.scene_key, roi=self.roi)
             arr = img.asarray()
             dims = img.dims
         return _to_canonical_shape(arr, dims)
