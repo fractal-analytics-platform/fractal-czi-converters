@@ -24,5 +24,8 @@ coverage.xml d
 # Zarr
 *.zarr
 
+# MkDocs build output
+site/
+
 # Coverage reports
 coverage.xml
