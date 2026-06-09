@@ -149,29 +149,28 @@ def build_scene_tiles(
     img = czi.scenes[scene_key]
     sizes = dict(img.sizes)
 
-    # (fov_name, (x, y, w, h), roi) per tile to build for this scene.
-    scene_tiles: list[
-        tuple[str, tuple[int, int, int, int], tuple[int, int, int, int] | None]
-    ]
+    # (fov_name, (x, y, w, h), mosaic_index) per tile to build for this scene.
+    scene_tiles: list[tuple[str, tuple[int, int, int, int], int | None]]
     if mosaic_mode == "assembled":
         # One field of view per scene; czifile assembles any internal mosaic
-        # when the scene is read (no ROI cropping).
+        # when the scene is read (no per-tile selection).
         scene_tiles = [(fov_name, img.bbox, None)]
     else:
-        # One field of view per mosaic sub-tile. Each loader reads only its ROI;
-        # see CziSceneLoader for the per-tile memory/decode trade-off. A scene
-        # with a single tile (no real mosaic) keeps its plain FOV name and loads
-        # the whole scene (no ROI crop).
+        # One field of view per mosaic sub-tile. Each loader reads only that
+        # tile's own subblocks by mosaic index (not a spatial ROI, which would
+        # fuse overlapping neighbours -- see CziSceneLoader). A scene with a
+        # single tile (no real mosaic) keeps its plain FOV name and loads the
+        # whole scene.
         scene_bboxes = scene_tile_bboxes(entries, scene_key)
         scene_tiles = []
         for mosaic_index, bbox in scene_bboxes:
             if len(scene_bboxes) > 1:
-                scene_tiles.append((f"{fov_name}_m{mosaic_index}", bbox, bbox))
+                scene_tiles.append((f"{fov_name}_m{mosaic_index}", bbox, mosaic_index))
             else:
                 scene_tiles.append((fov_name, bbox, None))
 
     tiles: list[Tile] = []
-    for tile_fov, (x, y, w, h), roi in scene_tiles:
+    for tile_fov, (x, y, w, h), tile_mosaic_index in scene_tiles:
         tiles.append(
             Tile(
                 fov_name=tile_fov,
@@ -187,7 +186,9 @@ def build_scene_tiles(
                 length_t=sizes.get("T", 1),
                 collection=collection,
                 image_loader=CziSceneLoader(
-                    file_path=czi_path, scene_key=scene_key, roi=roi
+                    file_path=czi_path,
+                    scene_key=scene_key,
+                    mosaic_index=tile_mosaic_index,
                 ),
                 acquisition_details=acquisition_details,
                 attributes={},
