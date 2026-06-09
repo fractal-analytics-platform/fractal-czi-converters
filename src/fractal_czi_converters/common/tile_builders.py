@@ -15,20 +15,37 @@ here so it is written once.
 from __future__ import annotations
 
 import logging
+from dataclasses import dataclass
 from typing import Any, Literal, cast
 
+import czifile
 from ome_zarr_converters_tools import (
     AcquisitionDetails,
+    ConverterOptions,
     ImageInPlate,
     SingleImage,
     Tile,
+    TiledImage,
     default_axes_builder,
+    tiles_aggregation_pipeline,
 )
 from ome_zarr_converters_tools.models._acquisition import ChannelInfo
 
 from fractal_czi_converters.common.loaders import CziSceneLoader
 
 logger = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class SceneConversionSpec:
+    """One scene to convert: its key, FOV name, and target collection."""
+
+    scene_key: int
+    """The S-coordinate key, matching ``czifile.CziFile.scenes`` keys."""
+    fov_name: str
+    """Field-of-view name for the scene, e.g. ``"P1"``."""
+    collection: SingleImage | ImageInPlate
+    """Output collection the scene's tiles belong to."""
 
 
 def get_pixel_sizes(img: Any) -> tuple[float, float, float]:
@@ -195,3 +212,55 @@ def build_scene_tiles(
             )
         )
     return tiles
+
+
+def build_tiled_images(
+    *,
+    czi_path: str,
+    scenes: list[SceneConversionSpec],
+    mosaic_mode: Literal["tiles", "assembled"],
+    converter_options: ConverterOptions,
+    filters: Any,
+) -> list[TiledImage]:
+    """Build the ``TiledImage``s for one CZI file from resolved scene specs.
+
+    Shared conversion driver for both converters: it opens the file once,
+    resolves file-level axes (a file is a time series if any scene has more than
+    one time point), builds every scene's positioned tiles via
+    :func:`build_scene_tiles`, and runs the aggregation pipeline. The single and
+    plate parsers differ only in how they produce ``scenes`` (one shared
+    :class:`SingleImage` vs a per-scene :class:`ImageInPlate`).
+    """
+    tiles: list[Tile] = []
+    with czifile.CziFile(czi_path) as czi:
+        entries = czi.filtered_subblock_directory
+        scene_keys = [spec.scene_key for spec in scenes]
+        is_time_series = any(
+            czi.scenes[key].sizes.get("T", 1) > 1 for key in scene_keys
+        )
+        ref_img = czi.scenes[scene_keys[0]]
+        acquisition_details = build_acquisition_details(
+            ref_img, is_time_series=is_time_series
+        )
+
+        for spec in scenes:
+            tiles.extend(
+                build_scene_tiles(
+                    czi=czi,
+                    entries=entries,
+                    czi_path=czi_path,
+                    scene_key=spec.scene_key,
+                    fov_name=spec.fov_name,
+                    collection=spec.collection,
+                    acquisition_details=acquisition_details,
+                    mosaic_mode=mosaic_mode,
+                )
+            )
+
+    return tiles_aggregation_pipeline(
+        tiles=tiles,
+        converter_options=converter_options,
+        filters=filters,
+        validators=None,
+        resource=None,
+    )

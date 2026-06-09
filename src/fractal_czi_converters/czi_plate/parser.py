@@ -23,9 +23,7 @@ import czifile
 from ome_zarr_converters_tools import (
     ConverterOptions,
     ImageInPlate,
-    Tile,
     TiledImage,
-    tiles_aggregation_pipeline,
 )
 
 from fractal_czi_converters.common.czi_metadata import (
@@ -35,8 +33,8 @@ from fractal_czi_converters.common.czi_metadata import (
     well_label,
 )
 from fractal_czi_converters.common.tile_builders import (
-    build_acquisition_details,
-    build_scene_tiles,
+    SceneConversionSpec,
+    build_tiled_images,
 )
 
 if TYPE_CHECKING:
@@ -84,7 +82,10 @@ def _resolve_plate_scenes(path: str) -> list[PlateSceneInfo]:
     discarded: list[int] = []
     for scene_key in scene_keys:
         elem = scene_elements.get(scene_key)
-        well = parse_well(elem) if elem is not None else None
+        if elem is None:
+            discarded.append(scene_key)
+            continue
+        well = parse_well(elem)
         if well is None:
             discarded.append(scene_key)
             continue
@@ -136,50 +137,26 @@ def parse_czi_plate_metadata(
     acquisition_id = acquisition_model.acquisition_id
 
     plate_scenes = _resolve_plate_scenes(czi_path)
-
-    tiles: list[Tile] = []
-    with czifile.CziFile(czi_path) as czi:
-        entries = czi.filtered_subblock_directory
-        # Resolve axes once at the file level: a file is a time series if any of
-        # its scenes has more than one time point. All tiles must share axes.
-        is_time_series = any(
-            czi.scenes[s.scene_key].sizes.get("T", 1) > 1 for s in plate_scenes
-        )
-        ref_img = czi.scenes[plate_scenes[0].scene_key]
-        acquisition_details = build_acquisition_details(
-            ref_img, is_time_series=is_time_series
-        )
-
-        for scene in plate_scenes:
-            collection = ImageInPlate(
+    scenes = [
+        SceneConversionSpec(
+            scene_key=scene.scene_key,
+            fov_name=scene.fov_name,
+            collection=ImageInPlate(
                 plate_name=plate_name,
                 row=scene.row,
                 column=scene.column,
                 acquisition=acquisition_id,
-            )
-            tiles.extend(
-                build_scene_tiles(
-                    czi=czi,
-                    entries=entries,
-                    czi_path=czi_path,
-                    scene_key=scene.scene_key,
-                    fov_name=scene.fov_name,
-                    collection=collection,
-                    acquisition_details=acquisition_details,
-                    mosaic_mode=acquisition_model.mosaic_mode,
-                )
-            )
+            ),
+        )
+        for scene in plate_scenes
+    ]
 
     wells = sorted({(s.row, s.column) for s in plate_scenes})
-    logger.info(
-        f"Built {len(tiles)} tile(s) from {czi_path} "
-        f"(plate '{plate_name}', wells: {wells})"
-    )
-
-    return tiles_aggregation_pipeline(
-        tiles=tiles,
+    logger.info(f"Converting {czi_path} as plate '{plate_name}' (wells: {wells})")
+    return build_tiled_images(
+        czi_path=czi_path,
+        scenes=scenes,
+        mosaic_mode=acquisition_model.mosaic_mode,
         converter_options=converter_options,
         filters=acquisition_model.advanced.filters,
-        validators=None,
-        resource=None,
     )

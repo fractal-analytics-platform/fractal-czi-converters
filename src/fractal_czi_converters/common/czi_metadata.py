@@ -7,8 +7,9 @@ plate (HCS) converters.
 A scene carries a *well label* when it has a non-empty ``<ArrayName>`` or a
 ``<Shape>`` with a non-empty ``Name`` attribute (e.g. ``"C4"``, ``"B1"``). A bare
 ``<Shape>`` with ``RowIndex``/``ColumnIndex`` but an empty ``Name`` is region
-geometry (manually drawn / rectangle scenes), *not* a well. See
-``CZI_PARSER_NOTES.md`` §2-4 for the empirical findings behind these heuristics.
+geometry (manually drawn / rectangle scenes), *not* a well. These rules are
+empirical: they were derived from real Zeiss exports where plate wells always
+expose a label while manually drawn regions do not.
 """
 
 from __future__ import annotations

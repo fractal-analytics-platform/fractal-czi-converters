@@ -26,9 +26,7 @@ import czifile
 from ome_zarr_converters_tools import (
     ConverterOptions,
     SingleImage,
-    Tile,
     TiledImage,
-    tiles_aggregation_pipeline,
 )
 
 from fractal_czi_converters.common.czi_metadata import (
@@ -38,8 +36,8 @@ from fractal_czi_converters.common.czi_metadata import (
     well_label,
 )
 from fractal_czi_converters.common.tile_builders import (
-    build_acquisition_details,
-    build_scene_tiles,
+    SceneConversionSpec,
+    build_tiled_images,
 )
 
 if TYPE_CHECKING:
@@ -72,11 +70,6 @@ class SingleAcquisitionInfo:
     scenes: dict[int, SingleSceneInfo]
     """Map of scene key to :class:`SingleSceneInfo`."""
 
-    @property
-    def scene_to_fov(self) -> dict[int, str]:
-        """Map scene key to field-of-view name."""
-        return {key: info.fov_name for key, info in self.scenes.items()}
-
 
 def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
     """Parse a single-acquisition CZI file into per-scene field-of-view info.
@@ -88,9 +81,9 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
         A :class:`SingleAcquisitionInfo`.
 
     Raises:
-        NotImplementedError: If the file is an HCS acquisition (its scenes span
-            more than one well). Use the plate converter for those files.
-        ValueError: If the file contains multiple independent acquisitions.
+        ValueError: If the file is an HCS acquisition (its scenes span more than
+            one well; use the plate converter), or if the file contains multiple
+            independent acquisitions.
     """
     with czifile.CziFile(path) as czi:
         check_single_acquisition(czi)
@@ -117,7 +110,7 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
         and (label := well_label(elem)) is not None
     }
     if len(wells) > 1:
-        raise NotImplementedError(
+        raise ValueError(
             f"{path} is an HCS (plate) acquisition spanning wells "
             f"{sorted(wells)}. Use the 'Convert CZI Plate to OME-Zarr' task."
         )
@@ -147,43 +140,21 @@ def parse_czi_single_acq_metadata(
     collection = SingleImage(image_path=zarr_name)
 
     acq_info = parse_single_acquisition(czi_path)
-
-    tiles: list[Tile] = []
-    with czifile.CziFile(czi_path) as czi:
-        entries = czi.filtered_subblock_directory
-        # Resolve axes once at the file level: a file is a time series if any of
-        # its scenes has more than one time point. All tiles must share axes.
-        is_time_series = any(
-            czi.scenes[key].sizes.get("T", 1) > 1 for key in acq_info.scenes
+    scenes = [
+        SceneConversionSpec(
+            scene_key=key, fov_name=info.fov_name, collection=collection
         )
-        ref_img = czi.scenes[next(iter(acq_info.scenes))]
-        acquisition_details = build_acquisition_details(
-            ref_img, is_time_series=is_time_series
-        )
-
-        for scene_key, scene_info in acq_info.scenes.items():
-            tiles.extend(
-                build_scene_tiles(
-                    czi=czi,
-                    entries=entries,
-                    czi_path=czi_path,
-                    scene_key=scene_key,
-                    fov_name=scene_info.fov_name,
-                    collection=collection,
-                    acquisition_details=acquisition_details,
-                    mosaic_mode=acquisition_model.mosaic_mode,
-                )
-            )
+        for key, info in acq_info.scenes.items()
+    ]
 
     logger.info(
-        f"Built {len(tiles)} tile(s) from {czi_path} "
+        f"Converting {czi_path} as single image '{zarr_name}' "
         f"(scenes: {sorted(acq_info.scenes)})"
     )
-
-    return tiles_aggregation_pipeline(
-        tiles=tiles,
+    return build_tiled_images(
+        czi_path=czi_path,
+        scenes=scenes,
+        mosaic_mode=acquisition_model.mosaic_mode,
         converter_options=converter_options,
         filters=acquisition_model.advanced.filters,
-        validators=None,
-        resource=None,
     )

@@ -334,6 +334,16 @@
                 "description": "Advanced acquisition options.",
                 "title": "Advanced"
               },
+              "mosaic_mode": {
+                "default": "tiles",
+                "description": "How to handle a scene that is a mosaic (CZI \"M\" dimension):\n\n* \"tiles\" (default): each mosaic sub-tile becomes its own positioned\n  field of view (\"P1_m0\", \"P1_m1\", ...) and \"ome-zarr-converters-tools\"\n  stitches them.\n* \"assembled\": each scene is converted as a single field of view (\"P1\");\n  \"czifile\" assembles the mosaic when reading the scene.",
+                "enum": [
+                  "tiles",
+                  "assembled"
+                ],
+                "title": "Mosaic Mode",
+                "type": "string"
+              },
               "zarr_name": {
                 "anyOf": [
                   {
@@ -346,16 +356,6 @@
                 "default": null,
                 "description": "Optional zarr output name override. None derives the name from the CZI\nfile stem.",
                 "title": "Zarr Name"
-              },
-              "mosaic_mode": {
-                "default": "tiles",
-                "description": "How to handle a scene that is a mosaic (CZI \"M\" dimension):\n\n* \"tiles\" (default): each mosaic sub-tile becomes its own positioned\n  field of view (\"P1_m0\", \"P1_m1\", ...) and \"ome-zarr-converters-tools\"\n  stitches them.\n* \"assembled\": each scene is converted as a single field of view\n  (\"P1\"); \"czifile\" assembles the mosaic when reading the scene.",
-                "enum": [
-                  "tiles",
-                  "assembled"
-                ],
-                "title": "Mosaic Mode",
-                "type": "string"
               }
             },
             "required": [
@@ -1543,12 +1543,12 @@
           "zarr_url": {
             "title": "Zarr Url",
             "type": "string",
-            "description": "URL to the OME-Zarr file."
+            "description": "URL to the OME-Zarr image to populate."
           },
           "init_args": {
             "$ref": "#/$defs/ConvertParallelInitArgs",
             "title": "Init Args",
-            "description": "Arguments for the compute task."
+            "description": "Arguments from the init task."
           }
         },
         "required": [
@@ -1558,7 +1558,7 @@
         "type": "object",
         "title": "SingleImageComputeTask"
       },
-      "docs_info": "## convert_czi_single_acq_init_task\nInitialize the task to convert a CZI single-acquisition dataset to OME-Zarr.\n## single_image_compute_task\nCreate a single OME-Zarr image from a CZI scene.\n",
+      "docs_info": "## convert_czi_single_acq_init_task\nInitialize the task to convert a CZI single-acquisition dataset to OME-Zarr.\n## single_image_compute_task\nConvert one CZI ``TiledImage`` into a single OME-Zarr image.\n",
       "docs_link": "https://github.com/fractal-analytics-platform/fractal-czi-converters"
     },
     {
@@ -1895,6 +1895,16 @@
                 "description": "Advanced acquisition options.",
                 "title": "Advanced"
               },
+              "mosaic_mode": {
+                "default": "tiles",
+                "description": "How to handle a scene that is a mosaic (CZI \"M\" dimension):\n\n* \"tiles\" (default): each mosaic sub-tile becomes its own positioned\n  field of view (\"P1_m0\", \"P1_m1\", ...) and \"ome-zarr-converters-tools\"\n  stitches them.\n* \"assembled\": each scene is converted as a single field of view (\"P1\");\n  \"czifile\" assembles the mosaic when reading the scene.",
+                "enum": [
+                  "tiles",
+                  "assembled"
+                ],
+                "title": "Mosaic Mode",
+                "type": "string"
+              },
               "plate_name": {
                 "anyOf": [
                   {
@@ -1914,16 +1924,6 @@
                 "minimum": 0,
                 "title": "Acquisition Id",
                 "type": "integer"
-              },
-              "mosaic_mode": {
-                "default": "tiles",
-                "description": "How to handle a scene that is a mosaic (CZI \"M\" dimension):\n\n* \"tiles\" (default): each mosaic sub-tile becomes its own positioned\n  field of view (\"P1_m0\", \"P1_m1\", ...) and \"ome-zarr-converters-tools\"\n  stitches them.\n* \"assembled\": each scene is converted as a single field of view;\n  \"czifile\" assembles the mosaic when reading the scene.",
-                "enum": [
-                  "tiles",
-                  "assembled"
-                ],
-                "title": "Mosaic Mode",
-                "type": "string"
               }
             },
             "required": [
@@ -3111,12 +3111,12 @@
           "zarr_url": {
             "title": "Zarr Url",
             "type": "string",
-            "description": "URL to the OME-Zarr file."
+            "description": "URL to the OME-Zarr image to populate."
           },
           "init_args": {
             "$ref": "#/$defs/ConvertParallelInitArgs",
             "title": "Init Args",
-            "description": "Arguments for the compute task."
+            "description": "Arguments from the init task."
           }
         },
         "required": [
@@ -3126,7 +3126,7 @@
         "type": "object",
         "title": "ImageInPlateComputeTask"
       },
-      "docs_info": "## convert_czi_plate_init_task\nInitialize the task to convert a CZI plate (HCS) dataset to OME-Zarr.\n## image_in_plate_compute_task\nCreate a single OME-Zarr image inside an OME-Zarr plate from a CZI scene.\n",
+      "docs_info": "## convert_czi_plate_init_task\nInitialize the task to convert a CZI plate (HCS) dataset to OME-Zarr.\n## image_in_plate_compute_task\nConvert one CZI ``TiledImage`` into an OME-Zarr image inside a plate.\n",
       "docs_link": "https://github.com/fractal-analytics-platform/fractal-czi-converters"
     }
   ],

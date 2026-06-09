@@ -58,9 +58,10 @@ dev = [
     "requests",
     "jsonschema",
     "ruff",
+    "ty",
     "pre-commit",
 ]
-test = ["pytest", "pytest-cov", "devtools", "jsonschema", "pyyaml", "requests"]
+test = ["pytest", "pytest-cov", "devtools", "jsonschema", "pyyaml", "requests", "ty"]
 docs = ["mkdocs-material", "mike"]
 
 # https://docs.astral.sh/ruff
@@ -100,9 +101,6 @@ ignore = [
 docstring-code-format = true
 docstring-code-line-length = 89
 skip-magic-trailing-comma = false
-
-[tool.ty.environment]
-python = ".pixi/envs/dev"
 
 # https://docs.pytest.org/
 [tool.pytest.ini_options]
