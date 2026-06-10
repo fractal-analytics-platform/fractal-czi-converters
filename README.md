@@ -1,4 +1,4 @@
-# CZI to OME-Zarr Converters
+# Fractal CZI Converters
 
 [![CI (build and test)](https://github.com/fractal-analytics-platform/fractal-czi-converters/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/fractal-analytics-platform/fractal-czi-converters/actions/workflows/build_and_test.yml)
 [![codecov](https://codecov.io/gh/fractal-analytics-platform/fractal-czi-converters/graph/badge.svg)](https://codecov.io/gh/fractal-analytics-platform/fractal-czi-converters)
@@ -24,28 +24,22 @@ image data well-by-well (or image-by-image).
 pip install fractal-czi-converters
 ```
 
+## Part of the OME-Zarr converters ecosystem
+
+This converter is a thin, format-specific layer built on
+[`ome-zarr-converters-tools`](https://github.com/BioVisionCenter/ome-zarr-converters-tools),
+the shared engine that handles tiling, image registration, and OME-Zarr writing for
+the whole Fractal converter family. Because they all share that engine, every
+converter offers the same options, behavior, and development workflow.
+
+Sibling converters built on the same tooling:
+
+- [`fractal-lif-converters`](https://github.com/fractal-analytics-platform/fractal-lif-converters) — Leica `.lif`
+- [`fractal-nd2-converters`](https://github.com/fractal-analytics-platform/fractal-nd2-converters) — Nikon `.nd2`
+- [`fractal-uzh-converters`](https://github.com/fractal-analytics-platform/fractal-uzh-converters) — HCS plates (Operetta, ScanR, CQ3K, CellVoyager, ImageXpress, custom TIFF)
+
 ## Documentation
 
 Full documentation — including the supported file layouts, all converter
 parameters, and the condition-table format — is available at
 <https://fractal-analytics-platform.github.io/fractal-czi-converters/>.
-
-## Development
-
-This project uses [pixi](https://pixi.sh/) for environment management and
-[pre-commit](https://pre-commit.com/) for linting/formatting with
-[Ruff](https://docs.astral.sh/ruff/).
-
-```bash
-# Install the development environment
-pip install -e ".[dev]"
-
-# Install the pre-commit hooks
-pre-commit install
-
-# Run the test suite
-pytest
-
-# Regenerate the Fractal manifest after changing task signatures
-fractal-manifest create --package fractal_czi_converters
-```
