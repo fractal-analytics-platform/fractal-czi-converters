@@ -5,7 +5,7 @@ a well label (``<ArrayName>`` or ``<Shape Name>``, e.g. ``"C4"``) from which the
 row/column are resolved; scenes are grouped by well, and every scene becomes a
 field of view inside its well's :class:`ImageInPlate`. Mosaic sub-tiles (CZI
 ``M``) are handled exactly as in the single-acquisition converter via the shared
-:func:`fractal_czi_converters.common.tile_builders.build_scene_tiles`.
+:func:`fractal_czi_converters.common._tile_builders.build_scene_tiles`.
 
 Multiple CZI files can be merged into one plate by passing several acquisitions
 with the same ``plate_name`` and distinct ``acquisition_id`` values (4i-style
@@ -26,13 +26,13 @@ from ome_zarr_converters_tools import (
     TiledImage,
 )
 
-from fractal_czi_converters.common.czi_metadata import (
+from fractal_czi_converters.common._czi_metadata import (
     check_single_acquisition,
     find_scene_elements,
     parse_well,
     well_label,
 )
-from fractal_czi_converters.common.tile_builders import (
+from fractal_czi_converters.common._tile_builders import (
     SceneConversionSpec,
     build_tiled_images,
 )

@@ -9,7 +9,7 @@ from ome_zarr_converters_tools import (
 )
 from pydantic import validate_call
 
-from fractal_czi_converters.common.compute import run_czi_compute_task
+from fractal_czi_converters.common._compute import run_czi_compute_task
 
 logger = logging.getLogger(__name__)
 

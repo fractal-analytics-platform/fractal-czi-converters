@@ -9,7 +9,7 @@ stitches the tiles.
 The module has two layers:
 
 * a CZI scene-metadata layer (shared with the plate converter, in
-  :mod:`fractal_czi_converters.common.czi_metadata`) that resolves each scene to
+  :mod:`fractal_czi_converters.common._czi_metadata`) that resolves each scene to
   a field-of-view name and rejects HCS plates - :func:`parse_single_acquisition`;
 * a conversion layer that turns that mapping into ``ome-zarr-converters-tools``
   ``Tile`` / ``TiledImage`` models - :func:`parse_czi_image_metadata`.
@@ -29,13 +29,13 @@ from ome_zarr_converters_tools import (
     TiledImage,
 )
 
-from fractal_czi_converters.common.czi_metadata import (
+from fractal_czi_converters.common._czi_metadata import (
     check_single_acquisition,
     find_scene_elements,
     parse_fov,
     well_label,
 )
-from fractal_czi_converters.common.tile_builders import (
+from fractal_czi_converters.common._tile_builders import (
     SceneConversionSpec,
     build_tiled_images,
 )

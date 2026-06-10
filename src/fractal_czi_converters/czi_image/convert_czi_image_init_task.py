@@ -9,7 +9,7 @@ from ome_zarr_converters_tools import (
 from pydantic import validate_call
 
 from fractal_czi_converters.common import BaseAcquisitionModel, run_convert_init
-from fractal_czi_converters.czi_image.parser import parse_czi_image_metadata
+from fractal_czi_converters.czi_image._parser import parse_czi_image_metadata
 
 logger = logging.getLogger("convert_czi_image_task")
 

@@ -17,7 +17,7 @@ from ome_zarr_converters_tools import (
     generic_compute_task,
 )
 
-from fractal_czi_converters.common.loaders import CziSceneLoader
+from fractal_czi_converters.common._loaders import CziSceneLoader
 
 logger = logging.getLogger(__name__)
 

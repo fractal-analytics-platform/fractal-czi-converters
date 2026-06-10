@@ -10,8 +10,8 @@ returns a *fused* crop whose seam contains the neighbouring tile's pixels.
 import czifile
 import numpy as np
 
-from fractal_czi_converters.common.loaders import CziSceneLoader
-from fractal_czi_converters.common.tile_builders import scene_tile_bboxes
+from fractal_czi_converters.common._loaders import CziSceneLoader
+from fractal_czi_converters.common._tile_builders import scene_tile_bboxes
 
 from .utils import DATA_DIR
 

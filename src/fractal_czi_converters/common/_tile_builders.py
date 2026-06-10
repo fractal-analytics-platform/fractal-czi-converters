@@ -31,7 +31,7 @@ from ome_zarr_converters_tools import (
 )
 from ome_zarr_converters_tools.models._acquisition import ChannelInfo
 
-from fractal_czi_converters.common.loaders import CziSceneLoader
+from fractal_czi_converters.common._loaders import CziSceneLoader
 
 logger = logging.getLogger(__name__)
 
