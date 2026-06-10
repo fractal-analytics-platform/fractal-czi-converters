@@ -1,4 +1,4 @@
-"""Initialize the CZI single-acquisition to OME-Zarr conversion task."""
+"""Initialize the CZI image to OME-Zarr conversion task."""
 
 import logging
 
@@ -9,16 +9,16 @@ from ome_zarr_converters_tools import (
 from pydantic import validate_call
 
 from fractal_czi_converters.common import BaseAcquisitionModel, run_convert_init
-from fractal_czi_converters.czi_single.parser import parse_czi_single_acq_metadata
+from fractal_czi_converters.czi_image.parser import parse_czi_image_metadata
 
-logger = logging.getLogger("convert_czi_single_acq_task")
+logger = logging.getLogger("convert_czi_image_task")
 
 
 default_converter_options = ConverterOptions()
 
 
-class CziSingleAcqAcquisitionModel(BaseAcquisitionModel):
-    """Acquisition input model for CZI single-acquisition conversion.
+class CziImageAcquisitionModel(BaseAcquisitionModel):
+    """Acquisition input model for CZI image conversion.
 
     The whole CZI file is converted into a single OME-Zarr image: every scene
     becomes a positioned field of view inside that image.
@@ -32,20 +32,20 @@ class CziSingleAcqAcquisitionModel(BaseAcquisitionModel):
 
 
 @validate_call
-def convert_czi_single_acq_init_task(
+def convert_czi_image_init_task(
     *,
     # Fractal parameters
     zarr_dir: str,
     # Task parameters
-    acquisitions: list[CziSingleAcqAcquisitionModel],
+    acquisitions: list[CziImageAcquisitionModel],
     converter_options: ConverterOptions = default_converter_options,
     overwrite: OverwriteMode = OverwriteMode.NO_OVERWRITE,
 ):
-    """Initialize the task to convert a CZI single-acquisition dataset to OME-Zarr.
+    """Initialize the task to convert a CZI file's scenes to an OME-Zarr image.
 
     Args:
         zarr_dir (str): Directory to store the Zarr files.
-        acquisitions (list[CziSingleAcqAcquisitionModel]): List of raw
+        acquisitions (list[CziImageAcquisitionModel]): List of raw
             acquisitions to convert to OME-Zarr.
         converter_options (ConverterOptions): Advanced converter options.
         overwrite (OverwriteMode): Overwrite mode for existing data.
@@ -56,7 +56,7 @@ def convert_czi_single_acq_init_task(
     return run_convert_init(
         zarr_dir=zarr_dir,
         acquisitions=acquisitions,
-        parse_function=parse_czi_single_acq_metadata,
+        parse_function=parse_czi_image_metadata,
         converter_options=converter_options,
         overwrite=overwrite,
         collection_type="SingleImage",
@@ -66,6 +66,4 @@ def convert_czi_single_acq_init_task(
 if __name__ == "__main__":
     from fractal_task_tools.task_wrapper import run_fractal_task
 
-    run_fractal_task(
-        task_function=convert_czi_single_acq_init_task, logger_name=logger.name
-    )
+    run_fractal_task(task_function=convert_czi_image_init_task, logger_name=logger.name)

@@ -22,7 +22,7 @@ Every acquisition object shares these base fields:
 | `Mosaic Mode` | `str` | `"tiles"` | How to handle scenes that are mosaics (see below). |
 | `Advanced` | `AcquisitionOptions` | `{}` | Advanced options including `Condition Table Path`, channel/pixel-size overrides, stage corrections, and filters. |
 
-Each converter adds a few task-specific fields on top of these — see the [CZI Plate](czi_plate.md) and [CZI Single Acquisition](czi_single.md) guides.
+Each converter adds a few task-specific fields on top of these — see the [CZI Plate](czi_plate.md) and [CZI Image](czi_image.md) guides.
 
 ### Mosaic Mode
 
@@ -151,4 +151,4 @@ All converters support three overwrite modes when the output already exists:
 ## Supported Converters
 
 - [CZI Plate](czi_plate.md)
-- [CZI Single Acquisition](czi_single.md)
+- [CZI Image](czi_image.md)

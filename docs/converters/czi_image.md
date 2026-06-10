@@ -1,4 +1,4 @@
-# CZI Single Acquisition
+# CZI Image
 
 Converts the scenes of a Zeiss CZI file into a single standalone OME-Zarr image (not a plate structure).
 
@@ -41,3 +41,21 @@ The converter extracts the following from the CZI file:
 !!! warning "Limitations"
     - This converter has been tested on a limited set of CZI acquisitions and may not handle all formats.
     - A CZI file must contain a single acquisition; files with multiple independent acquisitions are rejected.
+
+## Python API
+
+The converter is also available as a regular Python function, for use outside Fractal:
+
+```python
+from fractal_czi_converters import CziImageAcquisitionModel, convert_czi_image
+
+convert_czi_image(
+    zarr_dir="/path/to/zarr_dir",
+    acquisitions=[
+        CziImageAcquisitionModel(path="/path/to/Acquisition.czi"),
+    ],
+)
+```
+
+See [How to Run the Converters](../how_to_run_the_converters.md) for the full
+list of parameters and more examples.

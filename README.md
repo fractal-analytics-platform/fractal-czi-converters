@@ -12,7 +12,7 @@ format.
 | Task | Use case |
 |---|---|
 | `Convert CZI Plate to OME-Zarr` | Convert one or more `.czi` files containing a multi-well plate acquisition into an OME-Zarr HCS plate. |
-| `Convert CZI to OME-Zarr` | Convert the scenes of a `.czi` file into a single standalone OME-Zarr image. |
+| `Convert CZI Image to OME-Zarr` | Convert the scenes of a `.czi` file into a single standalone OME-Zarr image. |
 
 Each task is a Fractal **compound task**: an init step parses the `.czi`
 metadata and builds the parallelization list, and a compute step writes the

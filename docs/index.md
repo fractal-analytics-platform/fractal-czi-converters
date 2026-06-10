@@ -7,7 +7,7 @@ Fractal CZI Converters is a collection of [Fractal](https://fractal-analytics-pl
 | Task | Output | Description |
 |---|---|---|
 | `Convert CZI Plate to OME-Zarr` | OME-Zarr HCS Plate | Converts a multi-well plate acquisition stored in one or more CZI files |
-| `Convert CZI to OME-Zarr` | OME-Zarr Image | Converts the scenes of a CZI file into a single standalone OME-Zarr image |
+| `Convert CZI Image to OME-Zarr` | OME-Zarr Image | Converts the scenes of a CZI file into a single standalone OME-Zarr image |
 
 Each converter reads the native Zeiss metadata embedded in the CZI file and produces a well-structured OME-Zarr dataset that can be viewed in tools like [napari](https://napari.org/) or processed with downstream Fractal tasks.
 

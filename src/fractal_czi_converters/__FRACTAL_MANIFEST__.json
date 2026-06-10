@@ -2,14 +2,14 @@
   "manifest_version": "2",
   "task_list": [
     {
-      "name": "Convert CZI to OME-Zarr",
+      "name": "Convert CZI Image to OME-Zarr",
       "category": "Conversion",
       "tags": [
         "Zeiss",
-        "Single Image Converter"
+        "Image Converter"
       ],
       "type": "converter_compound",
-      "executable_non_parallel": "czi_single/convert_czi_single_acq_init_task.py",
+      "executable_non_parallel": "czi_image/convert_czi_image_init_task.py",
       "executable_parallel": "common/single_image_compute_task.py",
       "meta_non_parallel": {
         "cpus_per_task": 1,
@@ -298,6 +298,8 @@
                     "type": "Default"
                   },
                   "temp_json_options": {
+                    "max_in_memory_bytes": 10485760,
+                    "serialization": "Auto",
                     "temp_url": "{zarr_dir}/_tmp_json"
                   }
                 },
@@ -308,8 +310,8 @@
             "title": "ConverterOptions",
             "type": "object"
           },
-          "CziSingleAcqAcquisitionModel": {
-            "description": "Acquisition input model for CZI single-acquisition conversion.",
+          "CziImageAcquisitionModel": {
+            "description": "Acquisition input model for CZI image conversion.",
             "properties": {
               "path": {
                 "description": "Path to the acquisition CZI file.",
@@ -361,7 +363,7 @@
             "required": [
               "path"
             ],
-            "title": "CziSingleAcqAcquisitionModel",
+            "title": "CziImageAcquisitionModel",
             "type": "object"
           },
           "DataTypeEnum": {
@@ -704,7 +706,9 @@
               "temp_json_options": {
                 "$ref": "#/$defs/TempJsonOptions",
                 "default": {
-                  "temp_url": "{zarr_dir}/_tmp_json"
+                  "temp_url": "{zarr_dir}/_tmp_json",
+                  "serialization": "Auto",
+                  "max_in_memory_bytes": 10485760
                 },
                 "description": "Options for temporary JSON storage.",
                 "title": "Temporary JSON Options"
@@ -834,6 +838,24 @@
                 "description": "Template for the temporary JSON URL.",
                 "title": "Temp Url",
                 "type": "string"
+              },
+              "serialization": {
+                "default": "Auto",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "enum": [
+                  "Auto",
+                  "Memory",
+                  "JSON"
+                ],
+                "title": "Serialization",
+                "type": "string"
+              },
+              "max_in_memory_bytes": {
+                "default": 10485760,
+                "description": "Maximum total size of serialized tiled image data to keep in-memory\nbetween init and compute phases when serialization=\"Auto\".\nIf the total size exceeds this threshold, data will be written to temporary\nJSON files on disk instead. Default is 10 MiB.",
+                "minimum": 1,
+                "title": "Max In-Memory Bytes",
+                "type": "integer"
               }
             },
             "title": "TempJsonOptions",
@@ -933,7 +955,7 @@
           },
           "acquisitions": {
             "items": {
-              "$ref": "#/$defs/CziSingleAcqAcquisitionModel"
+              "$ref": "#/$defs/CziImageAcquisitionModel"
             },
             "title": "Acquisitions",
             "type": "array",
@@ -969,6 +991,8 @@
                   "type": "Default"
                 },
                 "temp_json_options": {
+                  "max_in_memory_bytes": 10485760,
+                  "serialization": "Auto",
                   "temp_url": "{zarr_dir}/_tmp_json"
                 },
                 "use_zarrs_codec": false
@@ -989,7 +1013,7 @@
           "acquisitions"
         ],
         "type": "object",
-        "title": "ConvertCziSingleAcqInitTask"
+        "title": "ConvertCziImageInitTask"
       },
       "args_schema_parallel": {
         "$defs": {
@@ -1028,8 +1052,28 @@
             "description": "Arguments for the compute task.",
             "properties": {
               "tiled_image_json_dump_url": {
-                "title": "Tiled Image Json Dump Url",
-                "type": "string"
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Tiled Image Json Dump Url"
+              },
+              "tiled_image_json_str": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Tiled Image Json Str"
               },
               "converter_options": {
                 "$ref": "#/$defs/ConverterOptions",
@@ -1042,7 +1086,6 @@
               }
             },
             "required": [
-              "tiled_image_json_dump_url",
               "converter_options"
             ],
             "title": "ConvertParallelInitArgs",
@@ -1126,6 +1169,8 @@
                     "type": "Default"
                   },
                   "temp_json_options": {
+                    "max_in_memory_bytes": 10485760,
+                    "serialization": "Auto",
                     "temp_url": "{zarr_dir}/_tmp_json"
                   }
                 },
@@ -1394,7 +1439,9 @@
               "temp_json_options": {
                 "$ref": "#/$defs/TempJsonOptions",
                 "default": {
-                  "temp_url": "{zarr_dir}/_tmp_json"
+                  "temp_url": "{zarr_dir}/_tmp_json",
+                  "serialization": "Auto",
+                  "max_in_memory_bytes": 10485760
                 },
                 "description": "Options for temporary JSON storage.",
                 "title": "Temporary JSON Options"
@@ -1498,6 +1545,24 @@
                 "description": "Template for the temporary JSON URL.",
                 "title": "Temp Url",
                 "type": "string"
+              },
+              "serialization": {
+                "default": "Auto",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "enum": [
+                  "Auto",
+                  "Memory",
+                  "JSON"
+                ],
+                "title": "Serialization",
+                "type": "string"
+              },
+              "max_in_memory_bytes": {
+                "default": 10485760,
+                "description": "Maximum total size of serialized tiled image data to keep in-memory\nbetween init and compute phases when serialization=\"Auto\".\nIf the total size exceeds this threshold, data will be written to temporary\nJSON files on disk instead. Default is 10 MiB.",
+                "minimum": 1,
+                "title": "Max In-Memory Bytes",
+                "type": "integer"
               }
             },
             "title": "TempJsonOptions",
@@ -1558,7 +1623,7 @@
         "type": "object",
         "title": "SingleImageComputeTask"
       },
-      "docs_info": "## convert_czi_single_acq_init_task\nInitialize the task to convert a CZI single-acquisition dataset to OME-Zarr.\n## single_image_compute_task\nConvert one CZI ``TiledImage`` into a single OME-Zarr image.\n",
+      "docs_info": "## convert_czi_image_init_task\nInitialize the task to convert a CZI file's scenes to an OME-Zarr image.\n## single_image_compute_task\nConvert one CZI ``TiledImage`` into a single OME-Zarr image.\n",
       "docs_link": "https://github.com/fractal-analytics-platform/fractal-czi-converters"
     },
     {
@@ -1859,6 +1924,8 @@
                     "type": "Default"
                   },
                   "temp_json_options": {
+                    "max_in_memory_bytes": 10485760,
+                    "serialization": "Auto",
                     "temp_url": "{zarr_dir}/_tmp_json"
                   }
                 },
@@ -2272,7 +2339,9 @@
               "temp_json_options": {
                 "$ref": "#/$defs/TempJsonOptions",
                 "default": {
-                  "temp_url": "{zarr_dir}/_tmp_json"
+                  "temp_url": "{zarr_dir}/_tmp_json",
+                  "serialization": "Auto",
+                  "max_in_memory_bytes": 10485760
                 },
                 "description": "Options for temporary JSON storage.",
                 "title": "Temporary JSON Options"
@@ -2402,6 +2471,24 @@
                 "description": "Template for the temporary JSON URL.",
                 "title": "Temp Url",
                 "type": "string"
+              },
+              "serialization": {
+                "default": "Auto",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "enum": [
+                  "Auto",
+                  "Memory",
+                  "JSON"
+                ],
+                "title": "Serialization",
+                "type": "string"
+              },
+              "max_in_memory_bytes": {
+                "default": 10485760,
+                "description": "Maximum total size of serialized tiled image data to keep in-memory\nbetween init and compute phases when serialization=\"Auto\".\nIf the total size exceeds this threshold, data will be written to temporary\nJSON files on disk instead. Default is 10 MiB.",
+                "minimum": 1,
+                "title": "Max In-Memory Bytes",
+                "type": "integer"
               }
             },
             "title": "TempJsonOptions",
@@ -2537,6 +2624,8 @@
                   "type": "Default"
                 },
                 "temp_json_options": {
+                  "max_in_memory_bytes": 10485760,
+                  "serialization": "Auto",
                   "temp_url": "{zarr_dir}/_tmp_json"
                 },
                 "use_zarrs_codec": false
@@ -2596,8 +2685,28 @@
             "description": "Arguments for the compute task.",
             "properties": {
               "tiled_image_json_dump_url": {
-                "title": "Tiled Image Json Dump Url",
-                "type": "string"
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Tiled Image Json Dump Url"
+              },
+              "tiled_image_json_str": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Tiled Image Json Str"
               },
               "converter_options": {
                 "$ref": "#/$defs/ConverterOptions",
@@ -2610,7 +2719,6 @@
               }
             },
             "required": [
-              "tiled_image_json_dump_url",
               "converter_options"
             ],
             "title": "ConvertParallelInitArgs",
@@ -2694,6 +2802,8 @@
                     "type": "Default"
                   },
                   "temp_json_options": {
+                    "max_in_memory_bytes": 10485760,
+                    "serialization": "Auto",
                     "temp_url": "{zarr_dir}/_tmp_json"
                   }
                 },
@@ -2962,7 +3072,9 @@
               "temp_json_options": {
                 "$ref": "#/$defs/TempJsonOptions",
                 "default": {
-                  "temp_url": "{zarr_dir}/_tmp_json"
+                  "temp_url": "{zarr_dir}/_tmp_json",
+                  "serialization": "Auto",
+                  "max_in_memory_bytes": 10485760
                 },
                 "description": "Options for temporary JSON storage.",
                 "title": "Temporary JSON Options"
@@ -3066,6 +3178,24 @@
                 "description": "Template for the temporary JSON URL.",
                 "title": "Temp Url",
                 "type": "string"
+              },
+              "serialization": {
+                "default": "Auto",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "enum": [
+                  "Auto",
+                  "Memory",
+                  "JSON"
+                ],
+                "title": "Serialization",
+                "type": "string"
+              },
+              "max_in_memory_bytes": {
+                "default": 10485760,
+                "description": "Maximum total size of serialized tiled image data to keep in-memory\nbetween init and compute phases when serialization=\"Auto\".\nIf the total size exceeds this threshold, data will be written to temporary\nJSON files on disk instead. Default is 10 MiB.",
+                "minimum": 1,
+                "title": "Max In-Memory Bytes",
+                "type": "integer"
               }
             },
             "title": "TempJsonOptions",

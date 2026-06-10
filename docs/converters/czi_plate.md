@@ -55,4 +55,23 @@ The converter extracts the following from the CZI file:
 !!! warning "Limitations"
     - This converter has been tested on a limited set of CZI acquisitions and may not handle all formats.
     - A CZI file must contain a single acquisition; files with multiple independent acquisitions are rejected.
-    - A file with no well-labelled scenes is not a plate — use the [CZI Single Acquisition](czi_single.md) task instead.
+    - A file with no well-labelled scenes is not a plate — use the [CZI Image](czi_image.md) task instead.
+
+## Python API
+
+The converter is also available as a regular Python function, for use outside Fractal:
+
+```python
+from fractal_czi_converters import CziPlateAcquisitionModel, convert_czi_plate
+
+convert_czi_plate(
+    zarr_dir="/path/to/zarr_dir",
+    acquisitions=[
+        CziPlateAcquisitionModel(path="/path/to/Plate.czi"),
+    ],
+)
+```
+
+See [How to Run the Converters](../how_to_run_the_converters.md) for the full
+list of parameters and more examples, including how to merge multiple CZI
+files into a single plate.

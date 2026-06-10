@@ -1,4 +1,4 @@
-"""Parse CZI single-acquisition metadata into a single ``TiledImage``.
+"""Parse CZI image metadata into a single ``TiledImage``.
 
 Each CZI file maps to one OME-Zarr image. Every scene becomes a positioned
 field of view, and every mosaic sub-tile (CZI ``M`` dimension) within a scene
@@ -12,7 +12,7 @@ The module has two layers:
   :mod:`fractal_czi_converters.common.czi_metadata`) that resolves each scene to
   a field-of-view name and rejects HCS plates - :func:`parse_single_acquisition`;
 * a conversion layer that turns that mapping into ``ome-zarr-converters-tools``
-  ``Tile`` / ``TiledImage`` models - :func:`parse_czi_single_acq_metadata`.
+  ``Tile`` / ``TiledImage`` models - :func:`parse_czi_image_metadata`.
 """
 
 from __future__ import annotations
@@ -41,8 +41,8 @@ from fractal_czi_converters.common.tile_builders import (
 )
 
 if TYPE_CHECKING:
-    from fractal_czi_converters.czi_single.convert_czi_single_acq_init_task import (
-        CziSingleAcqAcquisitionModel,
+    from fractal_czi_converters.czi_image.convert_czi_image_init_task import (
+        CziImageAcquisitionModel,
     )
 
 logger = logging.getLogger(__name__)
@@ -129,12 +129,12 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
 # --------------------------------------------------------------------------- #
 # Conversion layer (ome-zarr-converters-tools models)
 # --------------------------------------------------------------------------- #
-def parse_czi_single_acq_metadata(
+def parse_czi_image_metadata(
     *,
-    acquisition_model: CziSingleAcqAcquisitionModel,
+    acquisition_model: CziImageAcquisitionModel,
     converter_options: ConverterOptions,
 ) -> list[TiledImage]:
-    """Parse a CZI single-acquisition file into a single ``TiledImage``."""
+    """Parse a CZI file's scenes into a single ``TiledImage``."""
     czi_path = acquisition_model.path
     zarr_name = acquisition_model.zarr_name or Path(czi_path).stem
     collection = SingleImage(image_path=zarr_name)

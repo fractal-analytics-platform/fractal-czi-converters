@@ -2,10 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from fractal_czi_converters.common import image_in_plate_compute_task
-from fractal_czi_converters.czi_plate.convert_czi_plate_init_task import (
-    convert_czi_plate_init_task,
-)
+from fractal_czi_converters import convert_czi_plate
 
 from .utils import DATA_DIR, run_converter_test
 
@@ -44,9 +41,8 @@ def test_czi_plate(
 ):
     run_converter_test(
         tmp_path=tmp_path,
-        init_task_fn=convert_czi_plate_init_task,
-        compute_task_fn=image_in_plate_compute_task,
-        init_task_kwargs=init_task_kwargs,
+        api_fn=convert_czi_plate,
+        api_kwargs=init_task_kwargs,
         snapshot_path=snapshot_path,
         update_snapshots=update_snapshots,
         converter_options=converter_options,

@@ -2,10 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from fractal_czi_converters.common import single_image_compute_task
-from fractal_czi_converters.czi_single.convert_czi_single_acq_init_task import (
-    convert_czi_single_acq_init_task,
-)
+from fractal_czi_converters import convert_czi_image
 
 from .utils import DATA_DIR, run_converter_test
 
@@ -36,7 +33,7 @@ _MOSAIC_DATASET = "img_4p2c1z1t_ManuallyDrawnRegion"
         for mode in ("tiles", "assembled")
     ],
 )
-def test_czi_single_acq(
+def test_czi_image(
     tmp_path: Path,
     init_task_kwargs: dict,
     snapshot_path: Path,
@@ -45,9 +42,8 @@ def test_czi_single_acq(
 ):
     run_converter_test(
         tmp_path=tmp_path,
-        init_task_fn=convert_czi_single_acq_init_task,
-        compute_task_fn=single_image_compute_task,
-        init_task_kwargs=init_task_kwargs,
+        api_fn=convert_czi_image,
+        api_kwargs=init_task_kwargs,
         snapshot_path=snapshot_path,
         update_snapshots=update_snapshots,
         converter_options=converter_options,
