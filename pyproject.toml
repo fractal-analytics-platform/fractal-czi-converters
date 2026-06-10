@@ -34,6 +34,9 @@ description = "Converter from CZI files (Zeiss Microscope) to OME-Zarr format."
 readme = "README.md"
 license = { text = "BSD-3-Clause" }
 authors = [{ name = "Lorenzo Cerrone", email = "lorenzo.cerrone@uzh.ch" }]
+# NOTE: requires >=3.12 (deliberate, do not lower to 3.11 to match the sibling
+# converters): common/acquisitions.py uses PEP 695 generic syntax
+# (`class ParserProtocol[T: ...]`, `def parse_acquisitions[T: ...]`).
 requires-python = ">=3.12,<3.15"
 
 dependencies = [
@@ -49,6 +52,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "plotly",
     "notebook",
     "matplotlib",
     "devtools",
@@ -61,7 +65,7 @@ dev = [
     "ty",
     "pre-commit",
 ]
-test = ["pytest", "pytest-cov", "devtools", "jsonschema", "pyyaml", "requests", "ty"]
+test = ["pytest", "pytest-cov", "devtools", "jsonschema", "pyyaml", "requests"]
 docs = ["mkdocs-material", "mike"]
 
 # https://docs.astral.sh/ruff
@@ -129,9 +133,12 @@ exclude_lines = [
     "pass",
 ]
 
+[tool.ty.environment]
+python = ".pixi/envs/dev"
+
 [tool.pixi.workspace]
 channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64"]
+platforms = ["win-64", "osx-arm64", "linux-64"]
 
 [tool.pixi.pypi-dependencies]
 fractal-czi-converters = { path = ".", editable = true }
