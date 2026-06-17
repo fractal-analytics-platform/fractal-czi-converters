@@ -61,6 +61,24 @@ def get_pixel_sizes(img: Any) -> tuple[float, float, float]:
     return px, py, pz
 
 
+def _channel_wavelength_id(info: Any) -> str | None:
+    """Derive a channel's ``wavelength_id`` from its CZI channel metadata.
+
+    ``czifile`` exposes per-channel metadata as a dict keyed by the channel
+    name (the same name used as the channel label). The excitation wavelength is
+    used as the identifier for a fluorescence channel; transmitted-light
+    channels (e.g. T-PMT) carry no wavelength, so this returns ``None`` and the
+    label is used instead.
+    """
+    if not isinstance(info, dict):
+        return None
+    excitation = info.get("ExcitationWavelength")
+    if excitation is None:
+        return None
+    # Excitation comes through as a float (e.g. 493.0); drop the trailing ".0".
+    return f"{excitation:g}"
+
+
 def build_acquisition_details(img: Any, *, is_time_series: bool) -> AcquisitionDetails:
     """Build AcquisitionDetails from a CziImage (pixel-space positioning).
 
@@ -76,7 +94,13 @@ def build_acquisition_details(img: Any, *, is_time_series: bool) -> AcquisitionD
         )
 
     channels = (
-        [ChannelInfo(channel_label=name) for name in img.channels.keys()]
+        [
+            ChannelInfo(
+                channel_label=name,
+                wavelength_id=_channel_wavelength_id(info),
+            )
+            for name, info in img.channels.items()
+        ]
         if img.channels
         else None
     )
