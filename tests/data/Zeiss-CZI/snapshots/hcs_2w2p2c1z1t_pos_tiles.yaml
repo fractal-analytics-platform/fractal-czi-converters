@@ -24,8 +24,8 @@ plates:
         - AF488-T1
         - DAPI-T2
         wavelength_ids:
-        - AF488-T1
-        - DAPI-T2
+        - '493'
+        - '353'
         types:
           is_3D: false
         attributes:
@@ -88,8 +88,8 @@ plates:
         - AF488-T1
         - DAPI-T2
         wavelength_ids:
-        - AF488-T1
-        - DAPI-T2
+        - '493'
+        - '353'
         types:
           is_3D: false
         attributes:
