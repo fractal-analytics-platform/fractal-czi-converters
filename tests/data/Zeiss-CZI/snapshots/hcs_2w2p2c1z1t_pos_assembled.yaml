@@ -42,7 +42,7 @@ plates:
                   std: 18.77161706524887
                   min: 0.0
                   max: 169.0
-                  hash: 856ea19a7e3ce547a2bf3be566863ecdd80139d62c5c0c2548674376a54f1f60
+                  hash: b91a559ceeed23b5326ba55f46175ab485ed0599b99550ecbaa598d77d7ccaa1
                 yx_origin:
                 - 0
                 - 0.0
@@ -53,7 +53,7 @@ plates:
                   std: 18.437357125193422
                   min: 0.0
                   max: 171.0
-                  hash: ed2353f5a4025b7efaa57e1dc868126595b9d05c5a8768c7721650431a91d919
+                  hash: 28d6211ea92b7d1424d331e94717a78d29dfe45a531eb6a5795899b5d6e860a9
                 yx_origin:
                 - 0
                 - 212.13249999999996
@@ -66,7 +66,7 @@ plates:
                   std: 18.605720116268596
                   min: 0.0
                   max: 171.0
-                  hash: 3395ee6b271b2e119d0ca3c1192d00a577eb4732ca532f6b5971e98c4e066e3d
+                  hash: ba4d73a7db5ab743c4f6805e978117022858def8d1d5729d3771ef2df2389c0c
                 yx_origin: null
       C/05/0:
         axes:
@@ -106,7 +106,7 @@ plates:
                   std: 22.724838115502376
                   min: 0.0
                   max: 224.0
-                  hash: 14c0979806196b9afd6bcf5c07a2792fd33562a640e71104f31f89b5b6633bec
+                  hash: 8c9a5101e806c53c29ed3ac89f4ddbe9fe7511f18106aaaabb489ebf68b76c9c
                 yx_origin:
                 - 0
                 - 9000.715683593748
@@ -117,7 +117,7 @@ plates:
                   std: 24.525742236416587
                   min: 0.0
                   max: 255.0
-                  hash: 6797136c710e46f48a1316e41b6664760a4c242702f3deb9cfdfe5620b35295f
+                  hash: 5270039ac9c2eec1ed1a698d7fea806ba8d5da924df8683b93e92f5ab11c33f7
                 yx_origin:
                 - 0
                 - 9212.84818359375
@@ -130,5 +130,5 @@ plates:
                   std: 23.645176379422587
                   min: 0.0
                   max: 255.0
-                  hash: f481cab88667b384b25910cc02f0aafb73e7f873268f17b4b8bd80770d987fc2
+                  hash: d032f33d9fe5abdd67095aebe2972570de6617099966e8faf44b09d069a5ffce
                 yx_origin: null

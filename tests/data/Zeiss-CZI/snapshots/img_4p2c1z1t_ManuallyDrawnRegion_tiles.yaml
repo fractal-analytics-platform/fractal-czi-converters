@@ -34,7 +34,7 @@ images:
               std: 21.32282319280734
               min: 0.0
               max: 156.0
-              hash: 048cffec8737735a029ae3de7026a78729f07def370f65873de09cbc364b28de
+              hash: 62c15b44ac7e938c84cfa8411d3e8550015e9557b051fa78813cd58f61c6ef49
             yx_origin:
             - 0.0
             - 0.0
@@ -45,7 +45,7 @@ images:
               std: 19.934246998073373
               min: 0.0
               max: 162.0
-              hash: f5bdf40edbab8cd123ef5bc9ea4f69c63cd12e99ba4f9085e58b7b5dbe5028ed
+              hash: 450b6a32679e8cda8ee118ebac61f6f89ee39dade53db10733baec82de2633bb
             yx_origin:
             - 190.58779296874997
             - 0.0
@@ -56,7 +56,7 @@ images:
               std: 19.242366224604847
               min: 0.0
               max: 160.0
-              hash: 91ce6b9ab90bd1112237c17cb2addb7a5ca4c2852e3863bd2eb4ec57f8c3a4c3
+              hash: 33604e564c6aaabf8c9f3434e5f39ee0537f6cf0279ceeab85b247fe02e7670d
             yx_origin:
             - 381.17558593749993
             - 0.0
@@ -67,7 +67,7 @@ images:
               std: 17.1303064014379
               min: 0.0
               max: 120.0
-              hash: 1a09f875d18660b4aadb1af02126b8a761c3770ee84d854d01bf1e3ac62fe5fa
+              hash: 9d2bc7db7d41fba15116a39b8d3c0e7cae9cf320e5e62917be114c4933ae9a6e
             yx_origin:
             - 381.17558593749993
             - 192.24507812499996
@@ -80,5 +80,5 @@ images:
               std: 16.86343952070613
               min: 0.0
               max: 162.0
-              hash: f98bb07b87f0281a56b7fe64826a352547e0d43a2542cb7a4e2431507cddcb19
+              hash: 4cdaad6d2599f0c28a10191dde6ac48d9769abdbdbf3231eeaa0811c9dff90d7
             yx_origin: null
