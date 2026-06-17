@@ -358,6 +358,17 @@
                 "default": null,
                 "description": "Optional zarr output name override. None derives the name from the CZI\nfile stem.",
                 "title": "Zarr Name"
+              },
+              "split_scene": {
+                "default": "auto",
+                "description": "Whether to split a multi-scene CZI file into one OME-Zarr image per scene:\n\n* \"auto\" (default): split only when the file has more than one scene and\n  those scenes are tilescans (a scene made of several mosaic sub-tiles).\n  Plain multi-position files stay merged into a single positioned image.\n* \"true\": always split, one OME-Zarr image per scene.\n* \"false\": never split; every scene becomes a field of view inside a single\n  OME-Zarr image.\n\nWhen splitting, each image is named \"{zarr_name}_{fov_name}\".",
+                "enum": [
+                  "auto",
+                  "true",
+                  "false"
+                ],
+                "title": "Split Scene",
+                "type": "string"
               }
             },
             "required": [

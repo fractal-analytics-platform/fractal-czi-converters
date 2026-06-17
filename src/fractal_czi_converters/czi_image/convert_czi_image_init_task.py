@@ -1,6 +1,7 @@
 """Initialize the CZI image to OME-Zarr conversion task."""
 
 import logging
+from typing import Literal
 
 from ome_zarr_converters_tools import (
     ConverterOptions,
@@ -28,6 +29,19 @@ class CziImageAcquisitionModel(BaseAcquisitionModel):
     """
     Optional zarr output name override. None derives the name from the CZI
     file stem.
+    """
+    split_scene: Literal["auto", "true", "false"] = "auto"
+    """
+    Whether to split a multi-scene CZI file into one OME-Zarr image per scene:
+
+    * "auto" (default): split only when the file has more than one scene and
+      those scenes are tilescans (a scene made of several mosaic sub-tiles).
+      Plain multi-position files stay merged into a single positioned image.
+    * "true": always split, one OME-Zarr image per scene.
+    * "false": never split; every scene becomes a field of view inside a single
+      OME-Zarr image.
+
+    When splitting, each image is named "{zarr_name}_{fov_name}".
     """
 
 

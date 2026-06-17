@@ -1,10 +1,12 @@
-"""Parse CZI image metadata into a single ``TiledImage``.
+"""Parse CZI image metadata into ``TiledImage``s.
 
-Each CZI file maps to one OME-Zarr image. Every scene becomes a positioned
-field of view, and every mosaic sub-tile (CZI ``M`` dimension) within a scene
-becomes its own positioned tile. Placement is expressed in absolute pixel
-coordinates taken from the CZI subblock directory; ``ome-zarr-converters-tools``
-stitches the tiles.
+A CZI file maps to one OME-Zarr image by default: every scene becomes a
+positioned field of view, and every mosaic sub-tile (CZI ``M`` dimension) within
+a scene becomes its own positioned tile. Placement is expressed in absolute
+pixel coordinates taken from the CZI subblock directory;
+``ome-zarr-converters-tools`` stitches the tiles. When ``split_scene`` is set
+(or ``"auto"`` detects multi-scene tilescans), each scene becomes its own
+OME-Zarr image instead - see :func:`_should_split`.
 
 The module has two layers:
 
@@ -18,9 +20,10 @@ The module has two layers:
 from __future__ import annotations
 
 import logging
+from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any, Literal
 
 import czifile
 from ome_zarr_converters_tools import (
@@ -59,6 +62,8 @@ class SingleSceneInfo:
     """The S-coordinate key, matching ``czifile.CziFile.scenes`` keys."""
     fov_name: str
     """Field-of-view name, e.g. ``"P1"``."""
+    is_tilescan: bool = False
+    """Whether the scene is a mosaic tilescan (more than one mosaic sub-tile)."""
 
 
 @dataclass(frozen=True)
@@ -69,6 +74,21 @@ class SingleAcquisitionInfo:
     """Path to the parsed CZI file."""
     scenes: dict[int, SingleSceneInfo]
     """Map of scene key to :class:`SingleSceneInfo`."""
+
+
+def _mosaic_counts(entries: Any) -> dict[int, int]:
+    """Return the number of distinct mosaic sub-tiles per scene index.
+
+    Groups the subblock directory entries by ``scene_index`` and counts the
+    distinct ``mosaic_index`` values. A scene with more than one is a tilescan.
+    The ``-1`` key covers files without an explicit ``S`` dimension (a single
+    unindexed scene). Mirrors the grouping used by
+    :func:`fractal_czi_converters.common._tile_builders.scene_tile_bboxes`.
+    """
+    by_scene: dict[int, set[int]] = defaultdict(set)
+    for entry in entries:
+        by_scene[entry.scene_index].add(entry.mosaic_index)
+    return {scene_index: len(indices) for scene_index, indices in by_scene.items()}
 
 
 def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
@@ -89,6 +109,7 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
         check_single_acquisition(czi)
         scene_keys = sorted(czi.scenes.keys())
         scene_elements = find_scene_elements(czi)
+        mosaic_counts = _mosaic_counts(czi.filtered_subblock_directory)
 
     xml_keys = set(scene_elements)
     if xml_keys and xml_keys != set(scene_keys):
@@ -121,7 +142,14 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
         fov_name = (
             parse_fov(elem, scene_key) if elem is not None else f"P{scene_key + 1}"
         )
-        scenes[scene_key] = SingleSceneInfo(scene_key=scene_key, fov_name=fov_name)
+        # Files without an explicit ``S`` dimension expose their tiles under the
+        # ``-1`` scene index; fall back to it for the lone scene.
+        mosaic_count = mosaic_counts.get(scene_key, mosaic_counts.get(-1, 1))
+        scenes[scene_key] = SingleSceneInfo(
+            scene_key=scene_key,
+            fov_name=fov_name,
+            is_tilescan=mosaic_count > 1,
+        )
 
     return SingleAcquisitionInfo(path=path, scenes=scenes)
 
@@ -129,28 +157,79 @@ def parse_single_acquisition(path: str) -> SingleAcquisitionInfo:
 # --------------------------------------------------------------------------- #
 # Conversion layer (ome-zarr-converters-tools models)
 # --------------------------------------------------------------------------- #
+def _should_split(
+    mode: Literal["auto", "true", "false"], acq_info: SingleAcquisitionInfo
+) -> bool:
+    """Decide whether to emit one OME-Zarr image per scene.
+
+    A single-scene file is always kept as one image (splitting would only rename
+    it). ``"auto"`` splits a multi-scene file only when its scenes are tilescans.
+    """
+    if mode == "false" or len(acq_info.scenes) <= 1:
+        return False
+    if mode == "true":
+        return True
+    return any(info.is_tilescan for info in acq_info.scenes.values())
+
+
+def _split_scene_specs(
+    acq_info: SingleAcquisitionInfo, zarr_name: str
+) -> list[SceneConversionSpec]:
+    """One ``SingleImage`` per scene, named ``{zarr_name}_{fov_name}``.
+
+    Names are de-duplicated by falling back to ``{zarr_name}_s{scene_key}`` when
+    two scenes share a field-of-view label.
+    """
+    used: set[str] = set()
+    specs: list[SceneConversionSpec] = []
+    for key, info in acq_info.scenes.items():
+        image_path = f"{zarr_name}_{info.fov_name}"
+        if image_path in used:
+            image_path = f"{zarr_name}_s{key}"
+        used.add(image_path)
+        specs.append(
+            SceneConversionSpec(
+                scene_key=key,
+                fov_name=info.fov_name,
+                collection=SingleImage(image_path=image_path),
+            )
+        )
+    return specs
+
+
 def parse_czi_image_metadata(
     *,
     acquisition_model: CziImageAcquisitionModel,
     converter_options: ConverterOptions,
 ) -> list[TiledImage]:
-    """Parse a CZI file's scenes into a single ``TiledImage``."""
+    """Parse a CZI file's scenes into one or more ``TiledImage``s.
+
+    Every scene becomes a positioned field of view in a single OME-Zarr image,
+    unless ``split_scene`` requests (or ``"auto"`` detects) one image per scene.
+    """
     czi_path = acquisition_model.path
     zarr_name = acquisition_model.zarr_name or Path(czi_path).stem
-    collection = SingleImage(image_path=zarr_name)
 
     acq_info = parse_single_acquisition(czi_path)
-    scenes = [
-        SceneConversionSpec(
-            scene_key=key, fov_name=info.fov_name, collection=collection
+    if _should_split(acquisition_model.split_scene, acq_info):
+        scenes = _split_scene_specs(acq_info, zarr_name)
+        logger.info(
+            f"Converting {czi_path} as {len(scenes)} images "
+            f"(one per scene: {sorted(acq_info.scenes)})"
         )
-        for key, info in acq_info.scenes.items()
-    ]
+    else:
+        collection = SingleImage(image_path=zarr_name)
+        scenes = [
+            SceneConversionSpec(
+                scene_key=key, fov_name=info.fov_name, collection=collection
+            )
+            for key, info in acq_info.scenes.items()
+        ]
+        logger.info(
+            f"Converting {czi_path} as single image '{zarr_name}' "
+            f"(scenes: {sorted(acq_info.scenes)})"
+        )
 
-    logger.info(
-        f"Converting {czi_path} as single image '{zarr_name}' "
-        f"(scenes: {sorted(acq_info.scenes)})"
-    )
     return build_tiled_images(
         czi_path=czi_path,
         scenes=scenes,

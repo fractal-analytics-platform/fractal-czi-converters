@@ -55,3 +55,33 @@ def test_czi_image_extended(
         converter_options=converter_options,
         output_type="single_image",
     )
+
+
+# A plain 2-position file (two single-FOV scenes): split_scene="true" forces one
+# OME-Zarr image per scene. "auto" would *not* split it (the scenes are not
+# tilescans), which is covered by its default snapshot above.
+_SPLIT_DATASET = "img_2p2c1z1t_Position"
+
+
+@pytest.mark.extended
+def test_czi_image_split_extended(
+    tmp_path: Path,
+    update_snapshots: bool,
+    converter_options,
+):
+    run_converter_test(
+        tmp_path=tmp_path,
+        api_fn=convert_czi_image,
+        api_kwargs={
+            "acquisitions": [
+                {
+                    "path": str(RAW_DIR / f"{_SPLIT_DATASET}.czi"),
+                    "split_scene": "true",
+                }
+            ]
+        },
+        snapshot_path=SNAPSHOT_DIR / f"{_SPLIT_DATASET}_split.yaml",
+        update_snapshots=update_snapshots,
+        converter_options=converter_options,
+        output_type="single_image",
+    )
