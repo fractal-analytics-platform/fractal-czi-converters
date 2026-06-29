@@ -1,0 +1,134 @@
+plates:
+  hcs_2w2p2c1z1t_pos.zarr:
+    wells:
+    - C/04
+    - C/05
+    images:
+      C/04/0:
+        axes:
+        - c
+        - z
+        - y
+        - x
+        shape:
+        - 2
+        - 1
+        - 128
+        - 256
+        pixelsize:
+        - 1.0
+        - 1.0
+        - 1.6572851562499997
+        - 1.6572851562499997
+        channel_labels:
+        - AF488-T1
+        - DAPI-T2
+        wavelength_ids:
+        - '493'
+        - '353'
+        types:
+          is_3D: false
+        attributes:
+          plate: hcs_2w2p2c1z1t_pos.zarr
+          well: C04
+          acquisition: 0
+        tables:
+          FOV_ROI_table:
+            rois:
+              P1:
+                slice_repr: '[x: 0.0->128.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 10.24102783203125
+                  std: 18.77161706524887
+                  min: 0.0
+                  max: 169.0
+                  hash: b91a559ceeed23b5326ba55f46175ab485ed0599b99550ecbaa598d77d7ccaa1
+                yx_origin:
+                - 0
+                - 0.0
+              P2:
+                slice_repr: '[x: 128.0->256.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 10.50897216796875
+                  std: 18.437357125193422
+                  min: 0.0
+                  max: 171.0
+                  hash: 28d6211ea92b7d1424d331e94717a78d29dfe45a531eb6a5795899b5d6e860a9
+                yx_origin:
+                - 0
+                - 212.13249999999996
+          well_ROI_table:
+            rois:
+              image:
+                slice_repr: '[x: 0.0->256.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 10.375
+                  std: 18.605720116268596
+                  min: 0.0
+                  max: 171.0
+                  hash: ba4d73a7db5ab743c4f6805e978117022858def8d1d5729d3771ef2df2389c0c
+                yx_origin: null
+      C/05/0:
+        axes:
+        - c
+        - z
+        - y
+        - x
+        shape:
+        - 2
+        - 1
+        - 128
+        - 256
+        pixelsize:
+        - 1.0
+        - 1.0
+        - 1.6572851562499997
+        - 1.6572851562499997
+        channel_labels:
+        - AF488-T1
+        - DAPI-T2
+        wavelength_ids:
+        - '493'
+        - '353'
+        types:
+          is_3D: false
+        attributes:
+          plate: hcs_2w2p2c1z1t_pos.zarr
+          well: C05
+          acquisition: 0
+        tables:
+          FOV_ROI_table:
+            rois:
+              P1:
+                slice_repr: '[x: 0.0->128.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 14.058258056640625
+                  std: 22.724838115502376
+                  min: 0.0
+                  max: 224.0
+                  hash: 8c9a5101e806c53c29ed3ac89f4ddbe9fe7511f18106aaaabb489ebf68b76c9c
+                yx_origin:
+                - 0
+                - 9000.715683593748
+              P2:
+                slice_repr: '[x: 128.0->256.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 14.777191162109375
+                  std: 24.525742236416587
+                  min: 0.0
+                  max: 255.0
+                  hash: 5270039ac9c2eec1ed1a698d7fea806ba8d5da924df8683b93e92f5ab11c33f7
+                yx_origin:
+                - 0
+                - 9212.84818359375
+          well_ROI_table:
+            rois:
+              image:
+                slice_repr: '[x: 0.0->256.0, y: 0.0->128.0, z: 0.0->1.0]'
+                finger_print:
+                  mean: 14.417724609375
+                  std: 23.645176379422587
+                  min: 0.0
+                  max: 255.0
+                  hash: d032f33d9fe5abdd67095aebe2972570de6617099966e8faf44b09d069a5ffce
+                yx_origin: null

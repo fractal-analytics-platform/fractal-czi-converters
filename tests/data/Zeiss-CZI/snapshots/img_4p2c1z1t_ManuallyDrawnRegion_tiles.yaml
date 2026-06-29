@@ -1,0 +1,84 @@
+images:
+  img_4p2c1z1t_ManuallyDrawnRegion.zarr:
+    axes:
+    - c
+    - z
+    - y
+    - x
+    shape:
+    - 2
+    - 1
+    - 384
+    - 256
+    pixelsize:
+    - 1.0
+    - 1.0
+    - 1.6572851562499997
+    - 1.6572851562499997
+    channel_labels:
+    - AF488-T1
+    - DAPI-T2
+    wavelength_ids:
+    - '493'
+    - '353'
+    types:
+      is_3D: false
+    attributes: {}
+    tables:
+      FOV_ROI_table:
+        rois:
+          TR1_m0:
+            slice_repr: '[x: 0.0->128.0, y: 0.0->128.0, z: 0.0->1.0]'
+            finger_print:
+              mean: 13.243865966796875
+              std: 21.32282319280734
+              min: 0.0
+              max: 156.0
+              hash: 62c15b44ac7e938c84cfa8411d3e8550015e9557b051fa78813cd58f61c6ef49
+            yx_origin:
+            - 0.0
+            - 0.0
+          TR1_m1:
+            slice_repr: '[x: 0.0->128.0, y: 128.0->256.0, z: 0.0->1.0]'
+            finger_print:
+              mean: 12.83648681640625
+              std: 19.934246998073373
+              min: 0.0
+              max: 162.0
+              hash: 450b6a32679e8cda8ee118ebac61f6f89ee39dade53db10733baec82de2633bb
+            yx_origin:
+            - 190.58779296874997
+            - 0.0
+          TR1_m2:
+            slice_repr: '[x: 0.0->128.0, y: 256.0->384.0, z: 0.0->1.0]'
+            finger_print:
+              mean: 11.558624267578125
+              std: 19.242366224604847
+              min: 0.0
+              max: 160.0
+              hash: 33604e564c6aaabf8c9f3434e5f39ee0537f6cf0279ceeab85b247fe02e7670d
+            yx_origin:
+            - 381.17558593749993
+            - 0.0
+          TR1_m3:
+            slice_repr: '[x: 128.0->256.0, y: 256.0->384.0, z: 0.0->1.0]'
+            finger_print:
+              mean: 7.80023193359375
+              std: 17.1303064014379
+              min: 0.0
+              max: 120.0
+              hash: 9d2bc7db7d41fba15116a39b8d3c0e7cae9cf320e5e62917be114c4933ae9a6e
+            yx_origin:
+            - 381.17558593749993
+            - 192.24507812499996
+      well_ROI_table:
+        rois:
+          image:
+            slice_repr: '[x: 0.0->256.0, y: 0.0->384.0, z: 0.0->1.0]'
+            finger_print:
+              mean: 7.573201497395833
+              std: 16.86343952070613
+              min: 0.0
+              max: 162.0
+              hash: 4cdaad6d2599f0c28a10191dde6ac48d9769abdbdbf3231eeaa0811c9dff90d7
+            yx_origin: null
