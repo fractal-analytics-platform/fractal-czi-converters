@@ -1,6 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [v0.1.1]
+
+### Chores
+- Align repository tooling with `ome-zarr-converters-tools`: adopt its `.pre-commit-config.yaml` (`validate-pyproject` v0.25, `crate-ci/typos`, `astral-sh/ruff-pre-commit` v0.15.17, `nbstripout`) with a per-repo `_typos.toml`, add a `chores` pixi task, bump GitHub Actions pins (`checkout` v7, `codecov-action` v7, `action-gh-release` v3, `setup-python` v6), and add a terse `CLAUDE.md`.
+
+## [v0.1.0]
 
 ### Changed
 - **Breaking**: renamed the `Convert CZI to OME-Zarr` task to **`Convert CZI Image to OME-Zarr`**; renamed the `czi_single` package to `czi_image`, `CziSingleAcqAcquisitionModel` to `CziImageAcquisitionModel`, and `convert_czi_single_acq_init_task` to `convert_czi_image_init_task`.
