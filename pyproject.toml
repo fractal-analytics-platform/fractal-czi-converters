@@ -153,3 +153,4 @@ docs = { features = ["docs"], solve-group = "default" }
 ruff-fix-imports = { cmd = "ruff check --select I --fix" }
 ruff = { cmd = "ruff format", depends-on = ["ruff-fix-imports"] }
 test = { cmd = "pytest", depends-on = ["ruff"] }
+chores = { cmd = "pre-commit run --all-files", depends-on = ["test"] }
