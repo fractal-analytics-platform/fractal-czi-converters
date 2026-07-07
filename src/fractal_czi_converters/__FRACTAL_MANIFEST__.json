@@ -852,7 +852,7 @@
               },
               "serialization": {
                 "default": "Auto",
-                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- `\"Memory\"`: always keep data in-memory (skips all filesystem I/O).\n- `\"JSON\"`: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- `\"Auto\"`: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
                 "enum": [
                   "Auto",
                   "Memory",
@@ -1559,7 +1559,7 @@
               },
               "serialization": {
                 "default": "Auto",
-                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- `\"Memory\"`: always keep data in-memory (skips all filesystem I/O).\n- `\"JSON\"`: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- `\"Auto\"`: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
                 "enum": [
                   "Auto",
                   "Memory",
@@ -2485,7 +2485,7 @@
               },
               "serialization": {
                 "default": "Auto",
-                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- `\"Memory\"`: always keep data in-memory (skips all filesystem I/O).\n- `\"JSON\"`: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- `\"Auto\"`: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
                 "enum": [
                   "Auto",
                   "Memory",
@@ -3192,7 +3192,7 @@
               },
               "serialization": {
                 "default": "Auto",
-                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- ``\"Memory\"``: always keep data in-memory (skips all filesystem I/O).\n- ``\"JSON\"``: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- ``\"Auto\"``: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
+                "description": "Serialization mode for tiled image data between init and compute phases.\n\n- `\"Memory\"`: always keep data in-memory (skips all filesystem I/O).\n- `\"JSON\"`: always write to a temporary JSON file on disk (required for\n  distributed Fractal runs where init and compute execute on different machines).\n- `\"Auto\"`: use in-memory when the total serialized payload is \u226450 MB,\n  otherwise fall back to JSON files on disk.",
                 "enum": [
                   "Auto",
                   "Memory",
