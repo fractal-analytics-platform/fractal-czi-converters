@@ -1,0 +1,53 @@
+{
+  "images": {
+    "img_4p2c1z1t_ManuallyDrawnRegion.zarr": {
+      "axes": [
+        "c",
+        "z",
+        "y",
+        "x"
+      ],
+      "shape": [
+        2,
+        1,
+        358,
+        244
+      ],
+      "pixelsize": [
+        1.0,
+        1.0,
+        1.6572851562499997,
+        1.6572851562499997
+      ],
+      "channel_labels": [
+        "AF488-T1",
+        "DAPI-T2"
+      ],
+      "wavelength_ids": [
+        "493",
+        "353"
+      ],
+      "types": {
+        "is_3D": false
+      },
+      "attributes": {},
+      "tables": {
+        "well_ROI_table": {
+          "rois": {
+            "image": {
+              "slice_repr": "[x: 0.0->244.0, y: 0.0->358.0, z: 0.0->1.0]",
+              "finger_print": {
+                "mean": 7.833209,
+                "std": 17.03673,
+                "min": 0.0,
+                "max": 162.0,
+                "hash": "f37d8761bbbe24b0424899672ceaf5b0b6f1e2b0676768fe3ab78f9e3278240a"
+              },
+              "yx_origin": null
+            }
+          }
+        }
+      }
+    }
+  }
+}

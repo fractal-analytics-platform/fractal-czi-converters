@@ -1,10 +1,9 @@
 from pathlib import Path
 
 import pytest
+from ome_zarr_converters_tools.testing import run_converter_test
 
 from fractal_czi_converters import convert_czi_image
-
-from .utils import run_converter_test
 
 EXTENDED_DATA_DIR = Path(__file__).parent / "data-extended"
 SNAPSHOT_DIR = EXTENDED_DATA_DIR / "Zeiss-CZI" / "snapshots"
@@ -34,7 +33,7 @@ _SINGLE_IMAGE_DATASETS = [
     [
         pytest.param(
             {"acquisitions": [{"path": str(RAW_DIR / f"{name}.czi")}]},
-            SNAPSHOT_DIR / f"{name}.yaml",
+            SNAPSHOT_DIR / f"{name}.json",
         )
         for name in _SINGLE_IMAGE_DATASETS
     ],
@@ -80,7 +79,7 @@ def test_czi_image_split_extended(
                 }
             ]
         },
-        snapshot_path=SNAPSHOT_DIR / f"{_SPLIT_DATASET}_split.yaml",
+        snapshot_path=SNAPSHOT_DIR / f"{_SPLIT_DATASET}_split.json",
         update_snapshots=update_snapshots,
         converter_options=converter_options,
         output_type="single_image",

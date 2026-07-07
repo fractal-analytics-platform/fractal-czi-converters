@@ -1,10 +1,9 @@
 from pathlib import Path
 
 import pytest
+from ome_zarr_converters_tools.testing import run_converter_test
 
 from fractal_czi_converters import convert_czi_plate
-
-from .utils import run_converter_test
 
 EXTENDED_DATA_DIR = Path(__file__).parent / "data-extended"
 SNAPSHOT_DIR = EXTENDED_DATA_DIR / "Zeiss-CZI" / "snapshots"
@@ -28,7 +27,7 @@ _PLATE_DATASETS = [
     [
         pytest.param(
             {"acquisitions": [{"path": str(RAW_DIR / f"{name}.czi")}]},
-            SNAPSHOT_DIR / f"{name}.yaml",
+            SNAPSHOT_DIR / f"{name}.json",
             id=name,
         )
         for name in _PLATE_DATASETS
@@ -77,7 +76,7 @@ def test_czi_plate_multi_acquisition(
         tmp_path=tmp_path,
         api_fn=convert_czi_plate,
         api_kwargs=init_task_kwargs,
-        snapshot_path=SNAPSHOT_DIR / "merged_plate_multi_acquisition.yaml",
+        snapshot_path=SNAPSHOT_DIR / "merged_plate_multi_acquisition.json",
         update_snapshots=update_snapshots,
         converter_options=converter_options,
         output_type="plate",
