@@ -1,10 +1,11 @@
 from pathlib import Path
 
 import pytest
+from ome_zarr_converters_tools.testing import run_converter_test
 
 from fractal_czi_converters import convert_czi_plate
 
-from .utils import DATA_DIR, run_converter_test
+from .utils import DATA_DIR
 
 RAW_DIR = DATA_DIR / "Zeiss-CZI" / "raw"
 SNAPSHOT_DIR = DATA_DIR / "Zeiss-CZI" / "snapshots"
@@ -26,7 +27,7 @@ _PLATE_DATASET = "hcs_2w2p2c1z1t_pos"
                     }
                 ]
             },
-            SNAPSHOT_DIR / f"{_PLATE_DATASET}_{mode}.yaml",
+            SNAPSHOT_DIR / f"{_PLATE_DATASET}_{mode}.json",
             id=f"{_PLATE_DATASET}-{mode}",
         )
         for mode in ("tiles", "assembled")
