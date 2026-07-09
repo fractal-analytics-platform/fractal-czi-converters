@@ -546,15 +546,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
+  <a href="#v011" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [Unreleased]
+        [v0.1.1]
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[Unreleased]">
+    <nav class="md-nav" aria-label="[v0.1.1]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [v0.1.0]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[v0.1.0]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -580,7 +608,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chores" class="md-nav__link">
+  <a href="#chores_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Chores
@@ -641,15 +669,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#unreleased" class="md-nav__link">
+  <a href="#v011" class="md-nav__link">
     <span class="md-ellipsis">
       
-        [Unreleased]
+        [v0.1.1]
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="[Unreleased]">
+    <nav class="md-nav" aria-label="[v0.1.1]">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Chores
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v010" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        [v0.1.0]
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="[v0.1.0]">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -675,7 +731,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#chores" class="md-nav__link">
+  <a href="#chores_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Chores
@@ -722,7 +778,12 @@
 
 
 <h1 id="changelog">Changelog</h1>
-<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="v011">[v0.1.1]</h2>
+<h3 id="chores">Chores</h3>
+<ul>
+<li>Align repository tooling with <code>ome-zarr-converters-tools</code>: adopt its <code>.pre-commit-config.yaml</code> (<code>validate-pyproject</code> v0.25, <code>crate-ci/typos</code>, <code>astral-sh/ruff-pre-commit</code> v0.15.17, <code>nbstripout</code>) with a per-repo <code>_typos.toml</code>, add a <code>chores</code> pixi task, bump GitHub Actions pins (<code>checkout</code> v7, <code>codecov-action</code> v7, <code>action-gh-release</code> v3, <code>setup-python</code> v6), and add a terse <code>CLAUDE.md</code>.</li>
+</ul>
+<h2 id="v010">[v0.1.0]</h2>
 <h3 id="changed">Changed</h3>
 <ul>
 <li><strong>Breaking</strong>: renamed the <code>Convert CZI to OME-Zarr</code> task to <strong><code>Convert CZI Image to OME-Zarr</code></strong>; renamed the <code>czi_single</code> package to <code>czi_image</code>, <code>CziSingleAcqAcquisitionModel</code> to <code>CziImageAcquisitionModel</code>, and <code>convert_czi_single_acq_init_task</code> to <code>convert_czi_image_init_task</code>.</li>
@@ -735,7 +796,7 @@
 <li>Support condition tables to attach experimental metadata to plate wells.</li>
 <li>Add Python API functions (<code>convert_czi_image</code>, <code>convert_czi_plate</code>) for programmatic use outside Fractal.</li>
 </ul>
-<h3 id="chores">Chores</h3>
+<h3 id="chores_1">Chores</h3>
 <ul>
 <li>Build on <code>ome-zarr-converters-tools&gt;=0.10.0,&lt;0.11.0</code>, <code>fractal-task-tools&gt;=0.5.0,&lt;0.6.0</code>, and <code>ngio&gt;=0.5.8,&lt;0.6.0</code>.</li>
 <li>Read CZI files with <code>czifile</code>.</li>
