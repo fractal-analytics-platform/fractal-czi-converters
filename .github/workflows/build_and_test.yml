@@ -95,10 +95,8 @@ jobs:
           python -m pip install build
           python -m build
 
-      # TODO: Enable the PyPI release once a trusted publisher is configured for
-      # the project (https://docs.pypi.org/trusted-publishers/).
-      # - name: 🚢 Publish to PyPI
-      #   uses: pypa/gh-action-pypi-publish@release/v1
+      - name: 🚢 Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
 
       - uses: softprops/action-gh-release@v3
         with:
